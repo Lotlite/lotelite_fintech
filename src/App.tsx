@@ -10,19 +10,28 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-24">
+      <main>
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-20 px-4">
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Find the Perfect Loan for Your Needs
+        <div className="relative text-white py-32 px-4" style={{ backgroundImage: "url('/images/hero-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="absolute inset-0 bg-blue-600 bg-opacity-20"></div>
+          <div className="relative max-w-7xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              Find the Perfect Loan<br /> for Your Needs
             </h1>
-            <p className="text-xl mb-8">
+            <p className="text-2xl mb-10">
               Compare, Apply, and Track loans from multiple lenders
             </p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
-              Get Started
-            </button>
+            <div className="flex flex-col md:flex-row gap-6 justify-center">
+              <button className="bg-white text-blue-600 px-10 py-4 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                Check Your Eligibility
+              </button>
+              <button className="bg-white text-blue-600 px-10 py-4 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                Compare Now
+              </button>
+              <button className="bg-white text-blue-600 px-10 py-4 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                Get a Loan Offer
+              </button>
+            </div>
           </div>
         </div>
 
