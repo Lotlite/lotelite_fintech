@@ -15,7 +15,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <a href="/" className="text-2xl font-semibold text-blue-600">
               FinTech
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
@@ -23,9 +23,53 @@ const Navbar = () => {
             <a href="/" className="text-gray-600 hover:text-blue-600">
               Home
             </a>
-            <a href="/products" className="text-gray-600 hover:text-blue-600">
-              Products
-            </a>
+
+            {/* Products Dropdown */}
+            <div
+              className="relative group"
+              onMouseEnter={() => setIsProductsOpen(true)}
+              onMouseLeave={() => setIsProductsOpen(false)}
+            >
+              <button className="text-gray-600 hover:text-blue-600 flex items-center">
+                Products
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isProductsOpen && (
+                <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md">
+                  <a
+                    href="/property-loan"
+                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                  >
+                    Property Loan
+                  </a>
+                  <a
+                    href="/loan-against-property"
+                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                  >
+                    Loan Against Property
+                  </a>
+                  <a
+                    href="/education-loan"
+                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                  >
+                    Education Loan
+                  </a>
+                </div>
+              )}
+            </div>
+
             <a href="/support" className="text-gray-600 hover:text-blue-600">
               Support
             </a>
@@ -40,11 +84,11 @@ const Navbar = () => {
               href="/login"
               className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
-              Login / Sign In
-            </a>
+              Sign In
+            </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -76,21 +120,63 @@ const Navbar = () => {
               <a href="/" className="text-gray-600 hover:text-blue-600">
                 Home
               </a>
-              <a href="/products" className="text-gray-600 hover:text-blue-600">
-                Products
-              </a>
+
+              {/* Mobile Products Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  className="text-gray-600 hover:text-blue-600 flex items-center w-full text-left"
+                >
+                  Products
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+
+                {isProductsOpen && (
+                  <div className="mt-2 space-y-2 pl-4">
+                    <a
+                      href="/property-loan"
+                      className="block text-gray-700 hover:text-blue-600"
+                    >
+                      Property Loan
+                    </a>
+                    <a
+                      href="/loan-against-property"
+                      className="block text-gray-700 hover:text-blue-600"
+                    >
+                      Loan Against Property
+                    </a>
+                    <a
+                      href="/education-loan"
+                      className="block text-gray-700 hover:text-blue-600"
+                    >
+                      Education Loan
+                    </a>
+                  </div>
+                )}
+              </div>
+
               <a href="/support" className="text-gray-600 hover:text-blue-600">
                 Support
               </a>
               <a href="/contact" className="text-gray-600 hover:text-blue-600">
                 Contact
-              </Link>
+              </a>
               <Link
                 href="/login"
                 className="bg-blue-600 text-white px-4 py-2 rounded-md text-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               >
-              Sign In
-              </a>
+                Sign In
+              </Link>
             </div>
           </div>
         )}
@@ -99,4 +185,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
