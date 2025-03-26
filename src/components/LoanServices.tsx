@@ -1,4 +1,6 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+'use client';
+
+import useScrollReveal from '@/hooks/useScrollReveal';
 
 interface LoanCardProps {
   title: string;
@@ -42,7 +44,7 @@ const LoanServices = () => {
   return (
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 ref={titleRef} className="text-3xl font-bold text-center mb-12">
+        <h2 ref={titleRef} className="text-3xl text-black font-bold text-center mb-12">
           Our Loan Products
         </h2>
         

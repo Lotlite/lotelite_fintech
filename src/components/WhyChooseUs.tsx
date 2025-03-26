@@ -1,4 +1,6 @@
-import { useScrollReveal } from '../hooks/useScrollReveal';
+'use client';
+
+import useScrollReveal from '@/hooks/useScrollReveal';
 
 interface FeatureCardProps {
   title: string;
@@ -26,7 +28,7 @@ const WhyChooseUs = () => {
   return (
     <section className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 ref={titleRef} className="text-3xl font-bold text-center mb-12">
+        <h2 ref={titleRef} className="text-3xl text-black font-bold text-center mb-12">
           Why Choose Us
         </h2>
         

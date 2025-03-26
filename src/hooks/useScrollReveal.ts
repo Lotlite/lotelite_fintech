@@ -1,34 +1,32 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 
-export const useScrollReveal = (options = {}) => {
+const useScrollReveal = (options = {}) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
-    const element = elementRef.current;
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-reveal');
-          observer.unobserve(entry.target);
+          entry.target.classList.add('reveal');
         }
       });
-    }, {
-      threshold: 0.1,
-      ...options
-    });
+    }, options);
 
-    if (element) {
-      element.classList.add('opacity-0', 'translate-y-10');
-      observer.observe(element);
+    const currentRef = elementRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [options]);
 
   return elementRef;
-}; 
+};
+
+export default useScrollReveal; 

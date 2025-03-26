@@ -1,3 +1,6 @@
+'use client';
+
+import useScrollReveal from '@/hooks/useScrollReveal';
 import './PartnerBanks.css';
 
 const PartnerBanks = () => {
@@ -53,7 +56,7 @@ const PartnerBanks = () => {
   return (
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Partner Banks</h2>
+        <h2 className="text-3xl text-black font-bold text-center mb-12">Our Partner Banks</h2>
         
         <div className="relative overflow-hidden">
           <div className="bank-scroll-container">
