@@ -7,20 +7,25 @@ interface ProcessStepProps {
   title: string;
   description: string;
   stepNumber: number;
+  delay?: string;
 }
 
-const ProcessStep = ({ icon, title, description, stepNumber }: ProcessStepProps) => {
+const ProcessStep = ({ icon, title, description, stepNumber, delay = '0ms' }: ProcessStepProps) => {
   const stepRef = useScrollReveal({ threshold: 0.2 });
   
   return (
-    <div ref={stepRef} className="flex flex-col items-center space-y-2">
+    <div 
+      ref={stepRef} 
+      className="process-step flex flex-col items-center space-y-2"
+      style={{ animationDelay: delay }}
+    >
       {/* Number Badge */}
-      <div className="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-        {stepNumber}
+      <div className="step-number flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold relative">
+        <div className="relative z-10">{stepNumber}</div>
       </div>
       
       {/* Content */}
-      <div className="text-center">
+      <div className="text-center transform transition-all duration-500">
         <h3 className="text-lg font-semibold mb-1 text-gray-800">{title}</h3>
         <p className="text-gray-600 text-sm">{description}</p>
       </div>
@@ -29,8 +34,8 @@ const ProcessStep = ({ icon, title, description, stepNumber }: ProcessStepProps)
 };
 
 const DownArrow = () => (
-  <div className="flex justify-center">
-    <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div className="arrow-wrapper flex justify-center py-4">
+    <svg className="w-6 h-6 text-blue-600 animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
     </svg>
   </div>
@@ -87,21 +92,25 @@ const ApplicationProcess = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gray-50">
+    <section className="py-16 px-4 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h2 ref={titleRef} className="text-3xl font-bold text-gray-800 mb-12 text-center">
+        <h2 
+          ref={titleRef} 
+          className="text-3xl font-bold text-gray-800 mb-12 text-center animate-fade-in"
+        >
           How to apply?
         </h2>
         
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-4">
             {steps.map((step, index) => (
-              <div key={index}>
+              <div key={index} className="process-step-wrapper">
                 <ProcessStep
                   icon={step.icon}
                   title={step.title}
                   description={step.description}
                   stepNumber={index + 1}
+                  delay={`${(index + 1) * 200}ms`}
                 />
                 {index !== steps.length - 1 && <DownArrow />}
               </div>
@@ -112,11 +121,119 @@ const ApplicationProcess = () => {
             <img 
               src="https://website-static.boldsign.com/2024/06/3c595204-how-boldsign-improves-the-loan-application-process-for-banks.webp" 
               alt="Loan Application Process" 
-              className="w-full h-auto"
+              className="w-full h-auto rounded-lg shadow-2xl animate-float"
             />
           </div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .process-step {
+          opacity: 0;
+          transform: translateX(-30px);
+          animation: stepEntrance 0.8s cubic-bezier(0.2, 0.85, 0.4, 1.275) forwards;
+        }
+
+        .step-number::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 50%;
+          background: linear-gradient(45deg, #3B82F6, #60A5FA);
+          opacity: 0;
+          transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-number::before {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+
+        .process-step:hover {
+          transform: translateY(-5px);
+        }
+
+        @keyframes stepEntrance {
+          0% {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-bounce-slow {
+          animation: bounce 2s infinite;
+        }
+
+        .animate-fade-in {
+          opacity: 0;
+          animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(10px);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .arrow-wrapper {
+          opacity: 0.7;
+          transition: all 0.3s ease;
+        }
+
+        .arrow-wrapper:hover {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+
+        .process-step-wrapper {
+          transition: all 0.5s ease;
+        }
+
+        .process-step-wrapper:hover {
+          transform: translateX(10px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .process-step,
+          .animate-float,
+          .animate-bounce-slow,
+          .animate-fade-in {
+            animation: none;
+            transform: none;
+          }
+        }
+      `}</style>
     </section>
   );
 };

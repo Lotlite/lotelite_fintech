@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">LoanEase</h3>
+            <h3 className="text-xl font-bold mb-4">FinTech</h3>
             <p className="text-gray-400 mb-4">
               Your trusted partner in finding the perfect loan solution.
             </p>
@@ -39,8 +39,8 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Services</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Products</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
@@ -49,9 +49,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Personal Loans</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Business Loans</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home Loans</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Property Loans</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Loan Against Property</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Education Loans</a></li>
             </ul>
           </div>

@@ -23,11 +23,11 @@ const PartnerBanks = () => {
     },
     {
       name: "Kotak Bank",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/25/Kotak_Mahindra_Bank_logo.svg"
+      logo: "https://upload.wikimedia.org/wikipedia/en/3/39/Kotak_Mahindra_Group_logo.svg"
     },
     {
       name: "Yes Bank",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/9/94/Yes_Bank_Logo.svg"
+      logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Yes_Bank_Logo_2024.jpg"
     }
   ];
 

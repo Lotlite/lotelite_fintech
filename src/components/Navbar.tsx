@@ -19,21 +19,22 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden text-black-700 text-bold md:flex items-center space-x-8">
             <a href="/" className="text-gray-600 hover:text-blue-600">
               Home
             </a>
 
             {/* Products Dropdown */}
             <div
-              className="relative group"
+              className="relative"
               onMouseEnter={() => setIsProductsOpen(true)}
               onMouseLeave={() => setIsProductsOpen(false)}
             >
-              <button className="text-gray-600 hover:text-blue-600 flex items-center">
+              {/* Button */}
+              <button className="text-gray-600 hover:text-blue-600 flex items-center px-3 py-2">
                 Products
                 <svg
-                  className="w-4 h-4 ml-1"
+                  className="w-4 h-4 ml-1 transition-transform duration-200"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -47,28 +48,29 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               {isProductsOpen && (
-                <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md">
+                <div className="absolute left-0  w-56 bg-white shadow-lg rounded-lg border border-gray-200 transition-opacity duration-300">
                   <a
                     href="/property-loan"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Property Loan
                   </a>
                   <a
                     href="/loan-against-property"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Loan Against Property
                   </a>
                   <a
                     href="/education-loan"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100"
+                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Education Loan
                   </a>
                 </div>
               )}
             </div>
+
 
             <a href="/support" className="text-gray-600 hover:text-blue-600">
               Support
