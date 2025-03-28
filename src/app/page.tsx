@@ -37,7 +37,7 @@ export default function Home() {
               Find the Perfect Loan<br /> for Your Needs
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto">
-              Compare, Apply, and Track loans from multiple lenders. Get instant approval and competitive rates.
+              Compare, Apply, & Track loans from multiple lenders. Get instant approval and competitive rates.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center mb-12">
               <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
