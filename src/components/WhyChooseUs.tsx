@@ -15,16 +15,16 @@ const FeatureCard = ({ title, description, icon, delay = '0ms' }: FeatureCardPro
   return (
     <div 
       ref={cardRef} 
-      className="feature-card flex flex-col items-center text-center p-6 rounded-xl bg-white transition-all duration-700 ease-out"
+      className="feature-card flex flex-col items-center text-center p-6 rounded-xl bg-white/20 backdrop-blur-lg transition-all duration-700 ease-out relative"
       style={{ animationDelay: delay }}
     >
-      <div className="icon-wrapper mb-4 p-3 rounded-lg bg-blue-50 transition-all duration-500">
-        <div className="w-12 h-12 relative z-10">
+      <div className="icon-wrapper mb-4 p-3 rounded-lg bg-blue-50/90 transition-all duration-500">
+        <div className="w-12 h-12">
           {icon}
         </div>
       </div>
-      <h3 className="text-lg font-semibold mb-2 text-gray-800">{title}</h3>
-      <p className="text-sm text-gray-600">{description}</p>
+      <h3 className="text-lg font-semibold mb-2 text-white drop-shadow-lg">{title}</h3>
+      <p className="text-sm text-white font-medium drop-shadow-md">{description}</p>
     </div>
   );
 };
@@ -33,11 +33,13 @@ const WhyChooseUs = () => {
   const titleRef = useScrollReveal();
 
   return (
-    <section className="py-10 px-4 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-10 px-4 overflow-hidden relative">
+      <div className="absolute inset-0 bg-[url('/images/whybg.jpg')] bg-cover bg-center opacity-[100%]"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="max-w-7xl mx-auto relative z-10">
         <h2 
           ref={titleRef} 
-          className="text-3xl text-black font-bold text-center mb-10"
+          className="text-3xl font-bold text-center mb-10 text-white"
         >
           Why Choose Us
         </h2>
@@ -165,14 +167,15 @@ const WhyChooseUs = () => {
 
         .feature-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
-          background: linear-gradient(145deg, #ffffff, #f8faff);
+          box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(248, 250, 255, 0.15));
+          backdrop-filter: blur(8px);
         }
 
         .feature-card:hover .icon-wrapper {
           transform: scale(1.1) rotate(5deg);
-          background: linear-gradient(135deg, #EBF5FF 0%, #ffffff 100%);
-          box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.2);
+          background: linear-gradient(135deg, rgba(235, 245, 255, 0.9), rgba(255, 255, 255, 0.8));
+          box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.3);
         }
 
         @keyframes cardEntrance {
@@ -197,7 +200,7 @@ const WhyChooseUs = () => {
           background: linear-gradient(
             45deg,
             transparent 0%,
-            rgba(59, 130, 246, 0.1) 100%
+            rgba(59, 130, 246, 0.2) 100%
           );
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
@@ -209,8 +212,8 @@ const WhyChooseUs = () => {
         .feature-card:hover::before {
           background: linear-gradient(
             45deg,
-            rgba(59, 130, 246, 0.1) 0%,
-            rgba(59, 130, 246, 0.2) 100%
+            rgba(59, 130, 246, 0.2) 0%,
+            rgba(59, 130, 246, 0.3) 100%
           );
         }
 

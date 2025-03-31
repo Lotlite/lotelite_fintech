@@ -13,16 +13,16 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="text-2xl font-semibold text-blue-600">
+            <Link href="/" className="text-2xl font-semibold text-blue-600">
               FinTech
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden text-black-700 text-bold md:flex items-center space-x-8">
-            <a href="/" className="text-gray-600 hover:text-blue-600">
+            <Link href="/" className="text-gray-600 hover:text-blue-600">
               Home
-            </a>
+            </Link>
 
             {/* Products Dropdown */}
             <div
@@ -49,35 +49,34 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {isProductsOpen && (
                 <div className="absolute left-0  w-56 bg-white shadow-lg rounded-lg border border-gray-200 transition-opacity duration-300">
-                  <a
+                  <Link
                     href="/property-loan"
                     className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Property Loan
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/loan-against-property"
                     className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Loan Against Property
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/education-loan"
                     className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
                   >
                     Education Loan
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>
 
-
-            <a href="/support" className="text-gray-600 hover:text-blue-600">
+            <Link href="/support" className="text-gray-600 hover:text-blue-600">
               Support
-            </a>
-            <a href="/contact" className="text-gray-600 hover:text-blue-600">
+            </Link>
+            <Link href="/contact" className="text-gray-600 hover:text-blue-600">
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Login/Sign Up Button */}
@@ -119,9 +118,9 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <a href="/" className="text-gray-600 hover:text-blue-600">
+              <Link href="/" className="text-gray-600 hover:text-blue-600">
                 Home
-              </a>
+              </Link>
 
               {/* Mobile Products Dropdown */}
               <div className="relative">
@@ -145,34 +144,37 @@ const Navbar = () => {
 
                 {isProductsOpen && (
                   <div className="mt-2 space-y-2 pl-4">
-                    <a
+                    <Link
                       href="/property-loan"
                       className="block text-gray-700 hover:text-blue-600"
                     >
                       Property Loan
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/loan-against-property"
                       className="block text-gray-700 hover:text-blue-600"
                     >
                       Loan Against Property
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       href="/education-loan"
                       className="block text-gray-700 hover:text-blue-600"
                     >
                       Education Loan
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
 
-              <a href="/support" className="text-gray-600 hover:text-blue-600">
+              <Link href="/support" className="text-gray-600 hover:text-blue-600">
                 Support
-              </a>
-              <a href="/contact" className="text-gray-600 hover:text-blue-600">
-                Contact
-              </a>
+              </Link>
+              <Link
+                href="/contact"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                Contact Us
+              </Link>
               <Link
                 href="/login"
                 className="bg-blue-600 text-white px-4 py-2 rounded-md text-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
