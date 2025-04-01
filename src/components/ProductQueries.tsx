@@ -2,6 +2,7 @@
 
 import useScrollReveal from '../hooks/useScrollReveal';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 const QueryCard = ({
   icon,
@@ -39,6 +40,16 @@ const QueryCard = ({
 const ProductQueries = () => {
   const titleRef = useScrollReveal();
   const mapRef = useScrollReveal();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Initialize video when component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -74,13 +85,13 @@ const ProductQueries = () => {
           <div className="relative mb-4 group">
             <h2
               ref={titleRef}
-              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-700 to-violet-600 animate-gradient-x relative"
+              className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-violet-400 animate-gradient-x relative"
             >
               Got any product related queries?
               {/* Animated underline */}
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-600 via-purple-700 to-violet-600 group-hover:w-full transition-all duration-700 ease-in-out"></div>
+              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-400 via-purple-400 to-violet-400 group-hover:w-full transition-all duration-700 ease-in-out"></div>
               {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 via-purple-700/20 to-violet-600/20 filter blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-400/20 via-purple-400/20 to-violet-400/20 filter blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
             </h2>
           </div>
           <p className="text-gray-100 mb-10 max-w-3xl text-base md:text-lg font-medium text-shadow">
