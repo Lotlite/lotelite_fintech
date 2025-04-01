@@ -71,7 +71,7 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link href="/support-center" className="text-gray-600 hover:text-blue-600">
+            <Link href="/support" className="text-gray-600 hover:text-blue-600">
               Support
             </Link>
             <Link href="/contact" className="text-gray-600 hover:text-blue-600">
@@ -94,7 +94,6 @@ const Navbar = () => {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 hover:text-blue-600 focus:outline-none"
-              aria-label="Toggle mobile menu"
             >
               <svg
                 className="h-6 w-6"
@@ -167,7 +166,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              <Link href="/support-center" className="text-gray-600 hover:text-blue-600">
+              <Link href="/support" className="text-gray-600 hover:text-blue-600">
                 Support
               </Link>
               <Link

@@ -59,7 +59,7 @@ const ContactFooter = () => {
                 </Link>
                 </li>
                 <li>
-                <Link href="/support-center" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/" className="text-gray-400 hover:text-white transition-colors">
                   Support
                 </Link>
               </li>

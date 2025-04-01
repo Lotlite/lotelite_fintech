@@ -1,7 +1,6 @@
 'use client';
 
 import useScrollReveal from '../hooks/useScrollReveal';
-import Link from 'next/link';
 
 const Footer = () => {
   const footerRef = useScrollReveal();
@@ -41,7 +40,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Products</a></li>
-              <li><Link href="/support-center" className="text-gray-400 hover:text-white transition-colors">Support</Link></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
