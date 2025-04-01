@@ -3,32 +3,26 @@
 import useScrollReveal from '@/hooks/useScrollReveal';
 
 interface ProcessStepProps {
-  icon: React.ReactNode;
   title: string;
   description: string;
   stepNumber: number;
   delay?: string;
 }
 
-const ProcessStep = ({ icon, title, description, stepNumber, delay = '0ms' }: ProcessStepProps) => {
+const ProcessStep = ({ title, description, stepNumber, delay = '0ms' }: ProcessStepProps) => {
   const stepRef = useScrollReveal({ threshold: 0.2 });
-  
+
   return (
-    <div 
-      ref={stepRef} 
-      className="process-step flex flex-col items-center space-y-2"
+    <div
+      ref={stepRef}
+      className="flex flex-col items-center text-center"
       style={{ animationDelay: delay }}
     >
-      {/* Number Badge */}
-      <div className="step-number flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold relative">
-        <div className="relative z-10">{stepNumber}</div>
+      <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
+        {stepNumber}
       </div>
-      
-      {/* Content */}
-      <div className="text-center transform transition-all duration-500">
-        <h3 className="text-lg font-semibold mb-1 text-gray-800">{title}</h3>
-        <p className="text-gray-600 text-sm">{description}</p>
-      </div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </div>
   );
 };
@@ -50,8 +44,8 @@ const ApplicationProcess = () => {
       description: "Complete our simple online application form",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           />
         </svg>
       )
@@ -61,8 +55,8 @@ const ApplicationProcess = () => {
       description: "Select from multiple loan offers",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
       )
@@ -72,8 +66,8 @@ const ApplicationProcess = () => {
       description: "Upload required documents securely",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" 
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
           />
         </svg>
       )
@@ -83,8 +77,8 @@ const ApplicationProcess = () => {
       description: "Get approved within 24 hours",
       icon: (
         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
       )
@@ -94,19 +88,18 @@ const ApplicationProcess = () => {
   return (
     <section className="py-16 px-4 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h2 
-          ref={titleRef} 
+        <h2
+          ref={titleRef}
           className="text-3xl font-bold text-gray-800 mb-12 text-center animate-fade-in"
         >
           How to apply?
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-4">
             {steps.map((step, index) => (
               <div key={index} className="process-step-wrapper">
                 <ProcessStep
-                  icon={step.icon}
                   title={step.title}
                   description={step.description}
                   stepNumber={index + 1}
@@ -116,22 +109,26 @@ const ApplicationProcess = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="hidden md:flex justify-center">
-            <img 
-              src="https://website-static.boldsign.com/2024/06/3c595204-how-boldsign-improves-the-loan-application-process-for-banks.webp" 
-              alt="Loan Application Process" 
+            <img
+              src="https://website-static.boldsign.com/2024/06/3c595204-how-boldsign-improves-the-loan-application-process-for-banks.webp"
+              alt="Loan Application Process"
               className="w-full h-auto rounded-lg shadow-2xl animate-float"
             />
           </div>
         </div>
       </div>
 
-      <style jsx global>{`
+      <style>{`
         .process-step {
           opacity: 0;
           transform: translateX(-30px);
-          animation: stepEntrance 0.8s cubic-bezier(0.2, 0.85, 0.4, 1.275) forwards;
+          transition: all 0.5s ease-out;
+        }
+        .process-step.visible {
+          opacity: 1;
+          transform: translateX(0);
         }
 
         .step-number::before {
