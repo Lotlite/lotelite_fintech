@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar'
 import LoanServices from '../components/LoanServices'
 import WhyChooseUs from '../components/WhyChooseUs'
@@ -60,22 +59,14 @@ export default function Home() {
           >
             <div className="absolute inset-0 bg-blue-600 bg-opacity-25"></div>
             <div className="relative max-w-7xl mx-auto text-center px-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="mb-6"
-              >
+              <div className="mb-6 animate-fade-in-up">
                 <span className="bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full text-sm font-medium">
                   Trusted by 1M+ Customers
                 </span>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+              </div>
+
+              <h1
+                className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up"
               >
                 Find the Perfect Loan<br /> for Your Needs
               </motion.h1>
@@ -129,72 +120,19 @@ export default function Home() {
       </div>
     </motion.div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Loan Services Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <LoanServices />
-          </motion.div>
-
-          {/* Why Choose Us Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <WhyChooseUs />
-          </motion.div>
-
-          {/* Partner Banks Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <PartnerBanks />
-          </motion.div>
-
-          {/* Application Process Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <ApplicationProcess />
-          </motion.div>
-
-          {/* FAQ Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <FAQ />
-          </motion.div>
-
-          {/* Contact Us Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <ContactUs />
-          </motion.div>
+          {/* Rest of the sections */}
+          <LoanServices />
+          <WhyChooseUs />
+          <PartnerBanks />
+          <ApplicationProcess />
+          <FAQ />
+          <ContactUs />
+          <BankPartners />
         </main>
-
-        {/* Footer */}
         <Footer />
       </div>
     </UserExperience>
-  )
+  );
 }
