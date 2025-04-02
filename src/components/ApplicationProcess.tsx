@@ -23,6 +23,9 @@ const ProcessStep = ({ icon, title, description, stepNumber, delay = '0ms' }: Pr
       <div className="step-number flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold relative">
         <div className="relative z-10">{stepNumber}</div>
       </div>
+
+      {/* Icon (Fix: Use the icon prop here) */}
+      <div className="text-blue-600">{icon}</div>
       
       {/* Content */}
       <div className="text-center transform transition-all duration-500">

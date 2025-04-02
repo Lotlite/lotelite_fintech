@@ -6,7 +6,7 @@ const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
   
   // Replace this with your WhatsApp number (include country code without + or spaces)
-  const whatsappNumber = "910987654321"; // Example: "919876543210" for Indian number
+  const whatsappNumber = "918010250904"; // Example: "919876543210" for Indian number
   const defaultMessage = "Hello! I'm interested in your loan services."; // Customize this message
   
   // Create the WhatsApp URL with the number and message

@@ -8,11 +8,37 @@ import PartnerBanks from '../components/PartnerBanks'
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
-import BankPartners from '@/components/BankPartnersSimple'
+// import BankPartners from '@/components/BankPartnersSimple'
 import FAQ from '../components/FAQ'
 import UserExperience from '../components/UserExperience'
+import { useState, useEffect } from "react";
+
+const Counter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000; // Animation duration in milliseconds (2 seconds)
+    const increment = value / (duration / 10); // Increment per interval
+
+    const interval = setInterval(() => {
+      start += increment;
+      if (start >= value) {
+        start = value;
+        clearInterval(interval);
+      }
+      setCount(Math.floor(start)); // Update state with rounded value
+    }, 10); // Update every 10ms
+
+    return () => clearInterval(interval);
+  }, [value]);
+
+  return <>{count.toLocaleString()}{suffix}</>; // Format number with commas
+};
 
 export default function Home() {
+
+  
   return (
     <UserExperience>
       <div className="min-h-screen bg-white">
@@ -25,7 +51,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="relative text-white h-[85vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: "url('/images/hero-bg.jpg')",
+              backgroundImage: "url('/images/Hero.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -80,28 +106,28 @@ export default function Home() {
               
               {/* Trust Indicators */}
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="text-blue-600 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-              >
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold mb-1">₹50Cr+</div>
-                  <div className="text-sm">Loans Disbursed</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold mb-1">50+</div>
-                  <div className="text-sm">Partner Banks</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold mb-1">24/7</div>
-                  <div className="text-sm">Customer Support</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
-                  <div className="text-2xl font-bold mb-1">98%</div>
-                  <div className="text-sm">Customer Satisfaction</div>
-                </div>
-              </motion.div>
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5, duration: 0.8 }}
+      className="text-blue-700 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+    >
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
+        <div className="text-2xl font-bold mb-1"><Counter value={50} suffix='cr'/></div>
+        <div className="text-sm">Loans Disbursed</div>
+      </div>
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
+        <div className="text-2xl font-bold mb-1"><Counter value={50}  suffix='+'/></div>
+        <div className="text-sm">Partner Banks</div>
+      </div>
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
+        <div className="text-2xl font-bold mb-1"><Counter value={24}  suffix='hr'/></div>
+        <div className="text-sm">Customer Support</div>
+      </div>
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300">
+        <div className="text-2xl font-bold mb-1"><Counter value={98} suffix='%'/></div>
+        <div className="text-sm">Customer Satisfaction</div>
+      </div>
+    </motion.div>
             </div>
           </motion.div>
 
