@@ -1,14 +1,12 @@
 'use client';
 
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface PropertyLoanFormData {
     // Personal Information
     fullName: string;
     dateOfBirth: string;
-    age: string;
     panNumber: string;
     aadharNumber: string;
     address: string;
@@ -19,28 +17,18 @@ interface PropertyLoanFormData {
 
     // Loan Details
     loanAmount: string;
-    loanTenure: string;
     loanPurpose: string;
-
-    // Property Details
+    loanTenure: string;
     propertyType: string;
+    propertyValue: string;
     propertyAddress: string;
-    ownershipStatus: string;
-
-    // Bank Details
-    bankName: string;
-    accountNumber: string;
-    existingLoan: string;
-    creditScore: string;
 }
 
-const PropertyLoanPage: React.FC = () => {
+export default function PropertyLoanPage() {
     const router = useRouter();
     const [formData, setFormData] = useState<PropertyLoanFormData>({
-        // Personal Information
         fullName: '',
         dateOfBirth: '',
-        age: '',
         panNumber: '',
         aadharNumber: '',
         address: '',
@@ -48,38 +36,31 @@ const PropertyLoanPage: React.FC = () => {
         phoneNumber: '',
         employmentType: '',
         monthlyIncome: '',
-
-        // Loan Details
         loanAmount: '',
-        loanTenure: '',
         loanPurpose: '',
-
-        // Property Details
+        loanTenure: '',
         propertyType: '',
-        propertyAddress: '',
-        ownershipStatus: '',
-
-        // Bank Details
-        bankName: '',
-        accountNumber: '',
-        existingLoan: '',
-        creditScore: ''
+        propertyValue: '',
+        propertyAddress: ''
     });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Add your form submission logic here
         console.log('Form submitted:', formData);
+        // Show success message
+        alert('Application submitted successfully! Please login to track your application.');
+        // Redirect to login page
+        router.push('/login');
     };
 
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    <h1 className="text-4xl font-extrabold text-blue-600 sm:text-5xl mb-4 bg-white p-4 rounded-lg shadow-sm inline-block">
                         Property Loan Application
                     </h1>
-                    <p className="mt-4 text-lg text-gray-600">
+                    <p className="mt-4 text-xl text-gray-600">
                         Get a loan with competitive interest rates for your dream home
                     </p>
                 </div>
@@ -87,31 +68,37 @@ const PropertyLoanPage: React.FC = () => {
                 <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
                     {/* Personal Information Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Personal Information</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Personal Information
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
-                                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
+                                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                                    Full Name
+                                </label>
                                 <input
                                     type="text"
                                     id="fullName"
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     placeholder="Enter Your Full Name"
                                     required
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">Date of Birth</label>
+                                <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
+                                    Date of Birth
+                                </label>
                                 <input
                                     type="date"
                                     id="dateOfBirth"
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
                                     onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                                     required
                                 />
                             </div>
@@ -221,7 +208,9 @@ const PropertyLoanPage: React.FC = () => {
 
                     {/* Loan Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Loan Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Loan Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
@@ -274,7 +263,9 @@ const PropertyLoanPage: React.FC = () => {
 
                     {/* Property Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Property Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Property Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="propertyType" className="block text-sm font-medium text-gray-700">Property Type</label>
@@ -309,99 +300,17 @@ const PropertyLoanPage: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Bank Details Section */}
-                    <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Bank & Financial Details</h2>
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                            <div>
-                                <label htmlFor="bankName" className="block text-sm font-medium text-gray-700">Bank Name</label>
-                                <input
-                                    type="text"
-                                    id="bankName"
-                                    name="bankName"
-                                    value={formData.bankName}
-                                    onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                    placeholder="Enter Bank Name"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="accountNumber" className="block text-sm font-medium text-gray-700">Account Number</label>
-                                <input
-                                    type="text"
-                                    id="accountNumber"
-                                    name="accountNumber"
-                                    value={formData.accountNumber}
-                                    onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                    placeholder="Enter Account Number"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="existingLoan" className="block text-sm font-medium text-gray-700">Existing Loan (if any)</label>
-                                <input
-                                    type="text"
-                                    id="existingLoan"
-                                    name="existingLoan"
-                                    value={formData.existingLoan}
-                                    onChange={(e) => setFormData({ ...formData, existingLoan: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                    placeholder="Enter Existing Loan Details"
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="creditScore" className="block text-sm font-medium text-gray-700">Credit Score</label>
-                                <input
-                                    type="text"
-                                    id="creditScore"
-                                    name="creditScore"
-                                    value={formData.creditScore}
-                                    onChange={(e) => setFormData({ ...formData, creditScore: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                    placeholder="Enter Credit Score"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Declaration & Submit */}
-                    <div className="space-y-6">
-                        <div className="flex items-start">
-                            <div className="flex items-center h-5">
-                                <input
-                                    id="declaration"
-                                    name="declaration"
-                                    type="checkbox"
-                                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                    required
-                                />
-                            </div>
-                            <div className="ml-3 text-sm">
-                                <label htmlFor="declaration" className="font-medium text-gray-700">
-                                    Declaration
-                                </label>
-                                <p className="text-gray-500">I hereby declare that all the information provided above is true and correct to the best of my knowledge.</p>
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center">
-                            <button
-                                type="submit"
-                                className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >
-                                Submit Application
-                            </button>
-                        </div>
+                    {/* Submit Button */}
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Submit Application
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     );
-};
-
-export default PropertyLoanPage; 
+} 

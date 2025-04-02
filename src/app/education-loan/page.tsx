@@ -40,7 +40,7 @@ interface EducationLoanFormData {
     creditScore: string;
 }
 
-function EducationLoanPage() {
+export default function EducationLoanPage() {
     const router = useRouter();
     const [formData, setFormData] = useState<EducationLoanFormData>({
         // Student Details
@@ -82,16 +82,20 @@ function EducationLoanPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
+        // Show success message
+        alert('Application submitted successfully! Please login to track your application.');
+        // Redirect to login page
+        router.push('/login');
     };
 
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    <h1 className="text-4xl font-extrabold text-blue-600 sm:text-5xl mb-4 bg-white p-4 rounded-lg shadow-sm inline-block">
                         Education Loan Application
                     </h1>
-                    <p className="mt-4 text-lg text-gray-600">
+                    <p className="mt-4 text-xl text-gray-600">
                         Invest in your future with our education loan
                     </p>
                 </div>
@@ -99,7 +103,9 @@ function EducationLoanPage() {
                 <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
                     {/* Student Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Student Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Student Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="studentName" className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -202,7 +208,9 @@ function EducationLoanPage() {
 
                     {/* Parent/Guardian Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Parent/Guardian Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Parent/Guardian Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="guardianName" className="block text-sm font-medium text-gray-700">Guardian Name</label>
@@ -267,7 +275,9 @@ function EducationLoanPage() {
 
                     {/* Course Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Course Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Course Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="courseName" className="block text-sm font-medium text-gray-700">Course Name</label>
@@ -382,7 +392,9 @@ function EducationLoanPage() {
 
                     {/* Loan Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Loan Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Loan Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
@@ -436,7 +448,9 @@ function EducationLoanPage() {
 
                     {/* Bank Details Section */}
                     <div className="space-y-6">
-                        <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Bank Details</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-blue-500 pb-2">
+                            Bank Details
+                        </h2>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label htmlFor="bankName" className="block text-sm font-medium text-gray-700">Bank Name</label>
@@ -527,6 +541,4 @@ function EducationLoanPage() {
             </div>
         </div>
     );
-}
-
-export default EducationLoanPage; 
+} 
