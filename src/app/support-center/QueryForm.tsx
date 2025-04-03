@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useState, ChangeEvent, useRef, useEffect } from "react";
+import { FormEvent, useState, useRef, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 
 const MAX_CHARS = 500;

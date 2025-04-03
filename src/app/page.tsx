@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useEffect, useState } from "react";
 
 import Navbar from '../components/Navbar'
@@ -10,7 +10,7 @@ import PartnerBanks from '../components/PartnerBanks'
 
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
-import Footer from '../components/Footer'
+
 import ContactFooter from '@/components/ContactFooter';
 
 import FAQ from '../components/FAQ'
