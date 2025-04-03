@@ -3,6 +3,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 interface PropertyLoanFormData {
     // Personal Information
@@ -73,18 +74,29 @@ const PropertyLoanPage: React.FC = () => {
     };
 
     return (
-        <div className="mt-20 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mt-16 min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-200 to-blue-600 bg-clip-text text-transparent"
+                >
+                    Property Loan Application
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="text-xl text-blue-300 max-w-2xl mx-auto"
+                >
+                    Get a loan with competitive interest rates for your dream home
+                </motion.p>
+            </div>
             <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                        Property Loan Application
-                    </h1>
-                    <p className="mt-4 text-lg text-gray-600">
-                        Get a loan with competitive interest rates for your dream home
-                    </p>
-                </div>
 
-                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
+
+                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow mt-4">
                     {/* Personal Information Section */}
                     <div className="space-y-6">
                         <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Personal Information</h2>
@@ -97,7 +109,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Full Name"
                                     required
                                 />
@@ -111,7 +123,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
                                     onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 />
                             </div>
@@ -124,7 +136,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="panNumber"
                                     value={formData.panNumber}
                                     onChange={(e) => setFormData({ ...formData, panNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your PAN Number"
                                     required
                                 />
@@ -138,7 +150,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="aadharNumber"
                                     value={formData.aadharNumber}
                                     onChange={(e) => setFormData({ ...formData, aadharNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Aadhar Number"
                                     required
                                 />
@@ -151,7 +163,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="address"
                                     value={formData.address}
                                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Complete Address"
                                     rows={3}
                                     required
@@ -166,7 +178,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Email Address"
                                     required
                                 />
@@ -180,7 +192,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
                                     onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Phone Number"
                                     required
                                 />
@@ -193,7 +205,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="employmentType"
                                     value={formData.employmentType}
                                     onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Employment Type</option>
@@ -211,7 +223,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="monthlyIncome"
                                     value={formData.monthlyIncome}
                                     onChange={(e) => setFormData({ ...formData, monthlyIncome: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Monthly Income"
                                     required
                                 />
@@ -231,7 +243,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="loanAmount"
                                     value={formData.loanAmount}
                                     onChange={(e) => setFormData({ ...formData, loanAmount: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Required Loan Amount"
                                     required
                                 />
@@ -245,7 +257,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="loanTenure"
                                     value={formData.loanTenure}
                                     onChange={(e) => setFormData({ ...formData, loanTenure: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Loan Tenure"
                                     min="1"
                                     max="30"
@@ -260,7 +272,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="loanPurpose"
                                     value={formData.loanPurpose}
                                     onChange={(e) => setFormData({ ...formData, loanPurpose: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Purpose</option>
@@ -283,7 +295,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="propertyType"
                                     value={formData.propertyType}
                                     onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Property Type</option>
@@ -300,7 +312,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="propertyAddress"
                                     value={formData.propertyAddress}
                                     onChange={(e) => setFormData({ ...formData, propertyAddress: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Property Address"
                                     rows={3}
                                     required
@@ -321,7 +333,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="bankName"
                                     value={formData.bankName}
                                     onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Bank Name"
                                     required
                                 />
@@ -335,7 +347,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="accountNumber"
                                     value={formData.accountNumber}
                                     onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Account Number"
                                     required
                                 />
@@ -349,7 +361,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="existingLoan"
                                     value={formData.existingLoan}
                                     onChange={(e) => setFormData({ ...formData, existingLoan: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Existing Loan Details"
                                 />
                             </div>
@@ -362,7 +374,7 @@ const PropertyLoanPage: React.FC = () => {
                                     name="creditScore"
                                     value={formData.creditScore}
                                     onChange={(e) => setFormData({ ...formData, creditScore: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Credit Score"
                                 />
                             </div>

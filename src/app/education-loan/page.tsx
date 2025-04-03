@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 interface EducationLoanFormData {
     // Student Details
@@ -85,18 +86,31 @@ function EducationLoanPage() {
     };
 
     return (
-        <div className="mt-20 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                        Education Loan Application
-                    </h1>
-                    <p className="mt-4 text-lg text-gray-600">
-                        Invest in your future with our education loan
-                    </p>
-                </div>
+        <div className="mt-16 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
 
-                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-200 to-blue-600 bg-clip-text text-transparent"
+                >
+                    Education Loan Application
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="text-xl text-blue-300 max-w-2xl mx-auto"
+                >
+                    Invest in your future with our education loan
+                </motion.p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+
+
+                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow mt-4">
                     {/* Student Details Section */}
                     <div className="space-y-6">
                         <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Student Details</h2>
@@ -109,7 +123,7 @@ function EducationLoanPage() {
                                     name="studentName"
                                     value={formData.studentName}
                                     onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Full Name"
                                     required
                                 />
@@ -123,7 +137,7 @@ function EducationLoanPage() {
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
                                     onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 />
                             </div>
@@ -136,7 +150,7 @@ function EducationLoanPage() {
                                     name="aadharNumber"
                                     value={formData.aadharNumber}
                                     onChange={(e) => setFormData({ ...formData, aadharNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Aadhar Number"
                                     required
                                 />
@@ -150,7 +164,7 @@ function EducationLoanPage() {
                                     name="panNumber"
                                     value={formData.panNumber}
                                     onChange={(e) => setFormData({ ...formData, panNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your PAN Number"
                                     required
                                 />
@@ -163,7 +177,7 @@ function EducationLoanPage() {
                                     name="address"
                                     value={formData.address}
                                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Complete Address"
                                     rows={3}
                                     required
@@ -178,7 +192,7 @@ function EducationLoanPage() {
                                     name="email"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Email Address"
                                     required
                                 />
@@ -192,7 +206,7 @@ function EducationLoanPage() {
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
                                     onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Phone Number"
                                     required
                                 />
@@ -212,7 +226,7 @@ function EducationLoanPage() {
                                     name="guardianName"
                                     value={formData.guardianName}
                                     onChange={(e) => setFormData({ ...formData, guardianName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Guardian's Name"
                                     required
                                 />
@@ -225,7 +239,7 @@ function EducationLoanPage() {
                                     name="guardianRelation"
                                     value={formData.guardianRelation}
                                     onChange={(e) => setFormData({ ...formData, guardianRelation: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Relationship</option>
@@ -243,7 +257,7 @@ function EducationLoanPage() {
                                     name="guardianPhone"
                                     value={formData.guardianPhone}
                                     onChange={(e) => setFormData({ ...formData, guardianPhone: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Guardian's Phone Number"
                                     required
                                 />
@@ -257,7 +271,7 @@ function EducationLoanPage() {
                                     name="annualFamilyIncome"
                                     value={formData.annualFamilyIncome}
                                     onChange={(e) => setFormData({ ...formData, annualFamilyIncome: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Annual Family Income"
                                     required
                                 />
@@ -277,7 +291,7 @@ function EducationLoanPage() {
                                     name="courseName"
                                     value={formData.courseName}
                                     onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Course Name"
                                     required
                                 />
@@ -291,7 +305,7 @@ function EducationLoanPage() {
                                     name="courseDuration"
                                     value={formData.courseDuration}
                                     onChange={(e) => setFormData({ ...formData, courseDuration: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Course Duration"
                                     min="1"
                                     max="8"
@@ -307,7 +321,7 @@ function EducationLoanPage() {
                                     name="instituteName"
                                     value={formData.instituteName}
                                     onChange={(e) => setFormData({ ...formData, instituteName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Institute Name"
                                     required
                                 />
@@ -320,7 +334,7 @@ function EducationLoanPage() {
                                     name="instituteAddress"
                                     value={formData.instituteAddress}
                                     onChange={(e) => setFormData({ ...formData, instituteAddress: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Institute Address"
                                     rows={3}
                                     required
@@ -334,7 +348,7 @@ function EducationLoanPage() {
                                     name="courseCountry"
                                     value={formData.courseCountry}
                                     onChange={(e) => setFormData({ ...formData, courseCountry: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Country</option>
@@ -355,7 +369,7 @@ function EducationLoanPage() {
                                     name="totalCourseFee"
                                     value={formData.totalCourseFee}
                                     onChange={(e) => setFormData({ ...formData, totalCourseFee: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Total Course Fee"
                                     required
                                 />
@@ -368,7 +382,7 @@ function EducationLoanPage() {
                                     name="admissionStatus"
                                     value={formData.admissionStatus}
                                     onChange={(e) => setFormData({ ...formData, admissionStatus: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Status</option>
@@ -392,7 +406,7 @@ function EducationLoanPage() {
                                     name="loanAmount"
                                     value={formData.loanAmount}
                                     onChange={(e) => setFormData({ ...formData, loanAmount: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Required Loan Amount"
                                     required
                                 />
@@ -406,7 +420,7 @@ function EducationLoanPage() {
                                     name="loanTenure"
                                     value={formData.loanTenure}
                                     onChange={(e) => setFormData({ ...formData, loanTenure: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Loan Tenure"
                                     min="1"
                                     max="15"
@@ -421,7 +435,7 @@ function EducationLoanPage() {
                                     name="collateralType"
                                     value={formData.collateralType}
                                     onChange={(e) => setFormData({ ...formData, collateralType: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     required
                                 >
                                     <option value="">Select Collateral Type</option>
@@ -446,7 +460,7 @@ function EducationLoanPage() {
                                     name="bankName"
                                     value={formData.bankName}
                                     onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Bank Name"
                                     required
                                 />
@@ -460,7 +474,7 @@ function EducationLoanPage() {
                                     name="accountNumber"
                                     value={formData.accountNumber}
                                     onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Account Number"
                                     required
                                 />
@@ -474,7 +488,7 @@ function EducationLoanPage() {
                                     name="existingLoan"
                                     value={formData.existingLoan}
                                     onChange={(e) => setFormData({ ...formData, existingLoan: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Existing Loan Details"
                                 />
                             </div>
@@ -487,7 +501,7 @@ function EducationLoanPage() {
                                     name="creditScore"
                                     value={formData.creditScore}
                                     onChange={(e) => setFormData({ ...formData, creditScore: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Credit Score"
                                 />
                             </div>

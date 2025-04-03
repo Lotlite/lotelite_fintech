@@ -11,6 +11,7 @@ import PartnerBanks from '../components/PartnerBanks'
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
+import ContactFooter from '@/components/ContactFooter';
 
 import FAQ from '../components/FAQ'
 import UserExperience from '../components/UserExperience'
@@ -158,7 +159,8 @@ export default function Home() {
           <ContactUs />
 
         </main>
-        <Footer />
+        {/* <Footer /> */}
+        <ContactFooter />
       </div>
     </UserExperience>
   );

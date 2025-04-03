@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 interface LoanFormData {
     propertyValue: string;
@@ -29,18 +30,30 @@ export default function LoanAgainstPropertyPage() {
     };
 
     return (
-        <div className="mt-20 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                        Loan Against Property
-                    </h1>
-                    <p className="mt-4 text-lg text-gray-600">
-                        Get a loan by leveraging your property as collateral
-                    </p>
-                </div>
+        <div className="mt-16 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
 
-                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
+            <div className="max-w-6xl mx-auto text-center relative z-10">
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-200 to-blue-600 bg-clip-text text-transparent"
+                >
+                    Loan Against Property
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="text-xl text-blue-300 max-w-2xl mx-auto"
+                >
+                    Get a loan by leveraging your property as collateral
+                </motion.p>
+            </div>
+
+            <div className="max-w-3xl mx-auto">
+
+                <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow mt-4">
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
                             <label htmlFor="propertyValue" className="block text-sm font-medium text-gray-700">
@@ -53,7 +66,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="propertyValue"
                                     value={formData.propertyValue}
                                     onChange={(e) => setFormData({ ...formData, propertyValue: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Property Value"
                                 />
                             </div>
@@ -70,7 +83,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="loanAmount"
                                     value={formData.loanAmount}
                                     onChange={(e) => setFormData({ ...formData, loanAmount: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Required Loan Amount"
                                 />
                             </div>
@@ -86,7 +99,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="propertyType"
                                     value={formData.propertyType}
                                     onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                 >
                                     <option value="">Select property type</option>
                                     <option value="residential">Residential</option>
@@ -107,7 +120,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="propertyAge"
                                     value={formData.propertyAge}
                                     onChange={(e) => setFormData({ ...formData, propertyAge: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Property Age"
                                 />
                             </div>
@@ -124,7 +137,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="income"
                                     value={formData.income}
                                     onChange={(e) => setFormData({ ...formData, income: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                     placeholder="Enter Your Monthly Income"
                                 />
                             </div>
@@ -140,7 +153,7 @@ export default function LoanAgainstPropertyPage() {
                                     name="employmentType"
                                     value={formData.employmentType}
                                     onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
-                                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    className="text-gray-600 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2"
                                 >
                                     <option value="">Select employment type</option>
                                     <option value="salaried">Salaried</option>

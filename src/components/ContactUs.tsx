@@ -9,10 +9,17 @@ const ContactUs = () => {
   const formRef = useScrollReveal();
   const infoRef = useScrollReveal();
 
-  const [formData, setFormData] = useState<{ name: string; email: string; message: string }>({
+  type FormDataType = {
+    name: string;
+    email: string;
+    message: string;
+  };
+
+  // Define state with correct type
+  const [formData, setFormData] = useState<FormDataType>({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,18 +28,14 @@ const ContactUs = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
-        <motion.h2 
-          ref={titleRef} 
+        <motion.h2
+          ref={titleRef}
           className="text-3xl text-black font-bold text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,8 +46,8 @@ const ContactUs = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div 
-            ref={formRef} 
+          <motion.div
+            ref={formRef}
             className="bg-white rounded-lg shadow-md p-8"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -52,9 +55,9 @@ const ContactUs = () => {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              {['name', 'email', 'message'].map((field, index) => (
-                <motion.div 
-                  key={field} 
+              {(['name', 'email', 'message'] as (keyof FormDataType)[]).map((field, index) => (
+                <motion.div
+                  key={field}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 * index }}
@@ -67,26 +70,26 @@ const ContactUs = () => {
                       type={field === 'email' ? 'email' : 'text'}
                       id={field}
                       name={field}
-                      value={formData.email}
+                      value={formData[field]} // ✅ No TypeScript error
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
+                      className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
                       required
                     />
                   ) : (
                     <textarea
                       id={field}
                       name={field}
-                      value={formData[field]}
+                      value={formData[field]} // ✅ No TypeScript error
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
+                      className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
                       required
                     />
                   )}
                 </motion.div>
               ))}
-              <motion.button 
-                type="submit" 
+              <motion.button
+                type="submit"
                 className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -97,8 +100,8 @@ const ContactUs = () => {
           </motion.div>
 
           {/* Contact Information */}
-          <motion.div 
-            ref={infoRef} 
+          <motion.div
+            ref={infoRef}
             className="space-y-8"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,12 +109,12 @@ const ContactUs = () => {
             viewport={{ once: true }}
           >
             {[
-              { title: 'Address', text: '123 Financial District, Business Bay', icon: 'location' },
-              { title: 'Email', text: 'support@loanease.com', icon: 'mail' },
-              { title: 'Phone', text: '+1 (555) 123-4567', icon: 'phone' }
+              { title: 'Address', text: 'Lotlite Fintech Pvt Ltd. Office - 122,Gera Imperium, Opp- Wipro, Hinjewadi Phase 2, Rajiv Gandhi Infotech Park, Pune, Maharashtra 411057', icon: 'location' },
+              { title: 'Email', text: 'contact@lotlitefintech.com', icon: 'mail' },
+              { title: 'Phone', text: '+91 8805843309', icon: 'phone' }
             ].map(({ title, text, icon }, index) => (
-              <motion.div 
-                key={title} 
+              <motion.div
+                key={title}
                 className="flex items-start space-x-4 p-4 rounded-lg transition duration-300 hover:bg-blue-50 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0, x: 20 }}

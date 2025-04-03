@@ -21,7 +21,7 @@ const ProcessStep = ({ title, description, stepNumber, delay = '0ms' }: ProcessS
       <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
         {stepNumber}
       </div>
-      <h3 className="text-black text-xl font-semibold mb-2">{title}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-gray-900">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
   );
