@@ -7,7 +7,6 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import PartnerBanks from '../components/PartnerBanks'
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
-import Footer from '../components/Footer'
 import BankPartners from '@/components/BankPartnersSimple'
 import FAQ from '../components/FAQ'
 import UserExperience from '../components/UserExperience'
@@ -165,9 +164,6 @@ export default function Home() {
             <ContactUs />
           </motion.div>
         </main>
-
-        {/* Footer */}
-        <Footer />
       </div>
     </UserExperience>
   )

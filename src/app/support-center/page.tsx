@@ -2,120 +2,257 @@
 
 import { motion } from 'framer-motion';
 import ContactFooter from '@/components/ContactFooter';
+import Image from 'next/image';
+import { useState } from 'react';
+import QueryForm from './QueryForm';
+
+// FAQ Data with categories
+const faqData = [
+  {
+    id: 1,
+    question: "How can I check my application status?",
+    answer: "You can check your application status by logging into your account or contacting our support team.",
+    category: "Applications",
+    related: [2, 4],
+  },
+  {
+    id: 2,
+    question: "What documents do I need to submit?",
+    answer: "Required documents vary by product. Please check the specific product page or contact our support team for details.",
+    category: "Documentation",
+    related: [1, 3],
+  },
+  {
+    id: 3,
+    question: "How long does the approval process take?",
+    answer: "Approval times vary by product and application type. Most applications are processed within 24-48 hours.",
+    category: "Applications",
+    related: [2, 4],
+  },
+  {
+    id: 4,
+    question: "Can I modify my application after submission?",
+    answer: "Yes, you can modify your application within 24 hours of submission. Contact our support team for assistance.",
+    category: "Applications",
+    related: [1, 3],
+  },
+  {
+    id: 5,
+    question: "What are the interest rates for different loans?",
+    answer: "Interest rates depend on various factors including loan type, amount, and tenure. Please visit our products page for detailed information.",
+    category: "Products",
+    related: [6, 7],
+  },
+  {
+    id: 6,
+    question: "How do I make loan payments?",
+    answer: "You can make payments through our online portal, mobile app, or visit any of our branches. We also offer auto-debit facility.",
+    category: "Payments",
+    related: [5, 7],
+  },
+  {
+    id: 7,
+    question: "What happens if I miss a payment?",
+    answer: "Missing payments may affect your credit score. Please contact us immediately to discuss payment options and avoid penalties.",
+    category: "Payments",
+    related: [6, 8],
+  },
+  {
+    id: 8,
+    question: "How can I get my loan statement?",
+    answer: "You can download your loan statement from our online portal or request one through our customer service.",
+    category: "Documentation",
+    related: [6, 7],
+  }
+];
 
 const SupportCenterPage = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  // Get unique categories
+  const categories = ['All', ...new Set(faqData.map(faq => faq.category))];
+
+  // Filter FAQs based on search and category
+  const filteredFAQs = faqData.filter(faq => {
+    const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || faq.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  // Get related questions
+  const getRelatedQuestions = (relatedIds: number[]) => {
+    return faqData.filter(faq => relatedIds.includes(faq.id));
+  };
+
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section */}
-        <div className="relative py-20 px-4 bg-[#1C1F2E] text-white">
-          <div className="max-w-6xl mx-auto text-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900">
+        {/* Hero Section with Premium Styling */}
+        <div className="relative py-24 px-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30"></div>
+          <div className="max-w-6xl mx-auto text-center relative z-10">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent"
             >
               Customer Support
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg text-gray-300 max-w-2xl mx-auto"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-xl text-blue-100/80 max-w-2xl mx-auto"
             >
-              We're here to help you with any questions or concerns about our services
+              We're here to assist you with all your questions and concerns
             </motion.p>
           </div>
         </div>
 
-        {/* Support Options */}
-        <div className="max-w-6xl mx-auto py-16 px-4">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Information */}
-            <motion.div 
+        {/* FAQ Section with Premium Design */}
+        <div className="max-w-6xl mx-auto py-16 px-4 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-purple-500/5 rounded-3xl backdrop-blur-3xl"></div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-start relative z-10">
+            {/* Support Image */}
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-8"
+              className="relative h-[500px] w-full sticky top-8"
             >
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800">Phone Support</h3>
-                    <p className="text-gray-600">+91 1234567890</p>
-                    <p className="text-sm text-gray-500">Mon-Fri, 9:00 AM - 6:00 PM</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800">Email Support</h3>
-                    <p className="text-gray-600">support@lotlitefintech.com</p>
-                    <p className="text-sm text-gray-500">24/7 Response Time</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-800">Visit Us</h3>
-                    <p className="text-gray-600">Phoenix Marketcity, Viman Nagar</p>
-                    <p className="text-sm text-gray-500">Pune, Maharashtra 411014</p>
-                  </div>
-                </div>
-              </div>
+              <Image
+                src="/images/customer-support-service-vector-2642390.jpg"
+                alt="Customer Support Service"
+                fill
+                className="object-contain p-4"
+                priority
+              />
             </motion.div>
 
-            {/* FAQ Section */}
+            {/* Interactive FAQ Content */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white rounded-xl shadow-lg p-8"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/10"
             >
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+              {/* Search Bar */}
+              <div className="relative mb-6">
+                <svg 
+                  className="absolute left-4 top-3.5 text-gray-400 w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+                  />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search FAQs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              {/* Category Filters */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
+                      ${selectedCategory === category 
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-white/5 text-gray-300 hover:bg-white/10'}`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+
+              {/* FAQ List */}
               <div className="space-y-4">
-                <div className="border-b border-gray-200 pb-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">How can I check my application status?</h3>
-                  <p className="text-gray-600">You can check your application status by logging into your account or contacting our support team.</p>
-                </div>
-                <div className="border-b border-gray-200 pb-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">What documents do I need to submit?</h3>
-                  <p className="text-gray-600">Required documents vary by product. Please check the specific product page or contact our support team for details.</p>
-                </div>
-                <div className="border-b border-gray-200 pb-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">How long does the approval process take?</h3>
-                  <p className="text-gray-600">Approval times vary by product and application type. Most applications are processed within 24-48 hours.</p>
-                </div>
-                <div className="pb-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">Can I modify my application after submission?</h3>
-                  <p className="text-gray-600">Yes, you can modify your application within 24 hours of submission. Contact our support team for assistance.</p>
-                </div>
+                {filteredFAQs.map((faq) => (
+                  <motion.div
+                    key={faq.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="border border-white/10 rounded-lg overflow-hidden"
+                  >
+                    {/* Question */}
+                    <button
+                      onClick={() => setExpandedId(expandedId === faq.id ? null : faq.id)}
+                      className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                    >
+                      <h3 className="font-semibold text-white flex items-center gap-2">
+                        <span className="text-blue-400">Q.</span>
+                        {faq.question}
+                      </h3>
+                      <svg 
+                        className={`w-6 h-6 text-gray-400 transition-transform ${
+                          expandedId === faq.id ? 'rotate-180' : ''
+                        }`}
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2} 
+                          d="M19 9l-7 7-7-7" 
+                        />
+                      </svg>
+                    </button>
+
+                    {/* Answer and Related Questions */}
+                    {expandedId === faq.id && (
+                      <div className="px-6 pb-4">
+                        <p className="text-blue-100/70 mb-4">{faq.answer}</p>
+                        
+                        {/* Related Questions */}
+                        <div>
+                          <p className="text-sm text-gray-400 mb-2">Related Questions:</p>
+                          <div className="space-y-2">
+                            {getRelatedQuestions(faq.related).map((related) => (
+                              <button
+                                key={related.id}
+                                onClick={() => setExpandedId(related.id)}
+                                className="block text-sm text-blue-300 hover:text-blue-200 transition-colors"
+                              >
+                                {related.question}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Query Form Section */}
+      <QueryForm />
+
+      {/* Contact Footer */}
       <ContactFooter />
     </>
   );
 };
 
-export default SupportCenterPage; 
+export default SupportCenterPage;
