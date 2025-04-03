@@ -1,47 +1,39 @@
-.bank-scroll-container {
+.bank-slider {
   width: 100%;
   overflow: hidden;
+  white-space: nowrap;
   position: relative;
-  padding: 20px 0;
 }
 
-.bank-scroll {
+.bank-track {
   display: flex;
-  animation: scroll 30s linear infinite;
-  width: fit-content;
+  gap: 2rem;
+  animation: bank-scroll 20s linear infinite;
 }
 
-/* Pause animation on hover */
-.bank-scroll:hover {
-  animation-play-state: paused;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
+@keyframes bank-scroll {
+  from {
+    transform: translateX(0%);
   }
-  100% {
-    transform: translateX(-50%); /* Move by half width since we duplicated the items */
+  to {
+    transform: translateX(-50%);
   }
 }
 
-/* Add gradient fade effect on edges */
-.bank-scroll-container::before,
-.bank-scroll-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  z-index: 2;
+.bank-logo-card {
+  flex: 0 0 160px; /* Ensure consistent spacing */
+  height: 80px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.bank-scroll-container::before {
-  left: 0;
-  background: linear-gradient(to right, rgb(249 250 251), transparent);
+.bank-logo-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
-
-.bank-scroll-container::after {
-  right: 0;
-  background: linear-gradient(to left, rgb(249 250 251), transparent);
-} 
