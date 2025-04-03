@@ -14,6 +14,7 @@ import Footer from '../components/Footer'
 
 import FAQ from '../components/FAQ'
 import UserExperience from '../components/UserExperience'
+import EligibilityForm from '@/components/EligibilityForm';
 
 const stats = [
   { value: 50, suffix: "Cr+", label: "Loans Disbursed" },
@@ -23,6 +24,7 @@ const stats = [
 ];
 
 export default function Home() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const [animatedValues, setAnimatedValues] = useState(
     stats.map(() => 0) // Initialize all numbers to 0
@@ -109,9 +111,13 @@ export default function Home() {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="flex flex-col md:flex-row gap-4 justify-center mb-12"
               >
-                <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
+               <button
+                  className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg"
+                  onClick={() => setIsFormOpen(true)} // Open form on click
+                >
                   Check Your Eligibility
                 </button>
+                {isFormOpen && <EligibilityForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />}
 
                 <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
                   Get a Loan Offer
@@ -120,24 +126,24 @@ export default function Home() {
 
               {/* Trust Indicators */}
               <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.8 }}
-      className="text-white grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-    >
-      {stats.map((stat, index) => (
-        <div
-          key={index}
-          className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300"
-        >
-          <motion.div className="text-2xl font-bold mb-1">
-            {animatedValues[index].toLocaleString()}
-            {stat.suffix}
-          </motion.div>
-          <div className="text-sm">{stat.label}</div>
-        </div>
-      ))}
-    </motion.div>
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="text-white grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+              >
+                {stats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm p-4 rounded-lg transform hover:scale-105 transition-transform duration-300"
+                  >
+                    <motion.div className="text-2xl font-bold mb-1">
+                      {animatedValues[index].toLocaleString()}
+                      {stat.suffix}
+                    </motion.div>
+                    <div className="text-sm">{stat.label}</div>
+                  </div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
 
@@ -146,7 +152,7 @@ export default function Home() {
           <LoanServices />
           <WhyChooseUs />
           <PartnerBanks />
-          
+
           <ApplicationProcess />
           <FAQ />
           <ContactUs />
