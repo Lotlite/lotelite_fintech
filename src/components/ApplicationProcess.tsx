@@ -21,15 +21,8 @@ const ProcessStep = ({ title, description, stepNumber, delay = '0ms' }: ProcessS
       <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
         {stepNumber}
       </div>
-
-      {/* Icon (Fix: Use the icon prop here) */}
-      <div className="text-blue-600">{icon}</div>
-      
-      {/* Content */}
-      <div className="text-center transform transition-all duration-500">
-        <h3 className="text-lg font-semibold mb-1 text-gray-800">{title}</h3>
-        <p className="text-gray-600 text-sm">{description}</p>
-      </div>
+      <h3 className="text-black text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </div>
   );
 };
