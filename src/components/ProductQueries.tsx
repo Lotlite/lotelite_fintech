@@ -5,26 +5,30 @@ import Image from 'next/image';
 const QueryCard = ({
   icon,
   email,
-  description
+  description,
+  gradientFrom,
+  gradientTo
 }: {
   icon: React.ReactNode;
   email: string;
   description: string;
+  gradientFrom: string;
+  gradientTo: string;
 }) => {
   const cardRef = useScrollReveal();
 
   return (
     <div
       ref={cardRef}
-      className="contact-card bg-white rounded-xl p-6 shadow-lg transition-all duration-500 ease-out relative overflow-hidden group hover:scale-105 transform border border-gray-200 h-[180px] flex flex-col justify-between w-[400px]"
+      className="contact-card bg-white rounded-xl p-6 shadow-lg transition-all duration-500 ease-out relative overflow-hidden group hover:scale-105 transform border border-gray-200 h-[170px] flex flex-col justify-between w-[350px]"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-purple-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/[0.04] to-purple-600/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <div className="relative flex flex-col items-center text-center z-10">
         <div className="icon-wrapper w-12 h-12 mb-3 transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-3">
           {icon}
         </div>
         <div className="space-y-2">
-          <div className="h-0.5 w-8 bg-blue-400 mx-auto rounded-full transform transition-all duration-500 group-hover:w-16 group-hover:bg-gradient-to-r from-blue-400 to-purple-400"></div>
+          <div className="h-0.5 w-8 bg-blue-400 mx-auto rounded-full transform transition-all duration-500 group-hover:w-16 group-hover:bg-gradient-to-r from-blue-600 to-purple-600"></div>
           <a href={`mailto:${email}`} className="text-base font-bold text-blue-600 block hover:text-blue-700 transform transition-all duration-500 group-hover:scale-105">
             {email}
           </a>
@@ -69,9 +73,9 @@ const ProductQueries = () => {
             We have got dedicated service teams to help you with your queries. Just select a product and write to us. We usually respond within 48 hours.
           </p>
 
-          <div className="flex flex-col md:flex-row gap-20 justify-between relative">
+          <div className="flex flex-col md:flex-row gap-20 justify-center relative">
             {/* Left Side Section */}
-            <div className="flex-1">
+            <div className="flex-1 flex justify-center">
               <div className="space-y-6">
                 {/* Credit Report Query Card */}
                 <QueryCard
@@ -96,6 +100,8 @@ const ProductQueries = () => {
                   }
                   email="lotlite.properties@gmail.com"
                   description="For any help / support about your Credit Report or Credit Profile"
+                  gradientFrom="from-[#4CAF50]"
+                  gradientTo="to-[#2E7D32]"
                 />
                 
                 {/* Step Up Care Query Card */}
@@ -121,76 +127,198 @@ const ProductQueries = () => {
                   }
                   email="lotlite.properties@gmail.com"
                   description="For your step up card account and Fixed Deposit related queries"
+                  gradientFrom="from-[#5C6BC0]"
+                  gradientTo="to-[#3949AB]"
                 />
               </div>
             </div>
 
             {/* Right Side Section */}
             <div className="flex-1">
-              {/* Image Container */}
-              <div className="relative w-[500px] h-[400px]">
-                <Image
-                  src="/images/Contact-left1.jpg"
-                  alt="Contact Support"
-                  fill
-                  className="rounded-xl shadow-lg object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+              <div className="space-y-6">
+                {/* Image Container */}
+                <div className="relative w-[500px] h-[400px]">
+                  <Image
+                    src="/images/Contact-left1.jpg"
+                    alt="Contact Support"
+                    fill
+                    className="rounded-xl shadow-lg object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
               </div>
+            </div>
+          </div>
 
-              {/* Cards Container - Positioned where image was */}
-              <div className="space-y-6 mt-8">
-                {/* NPS Query */}
-                <QueryCard
-                  icon={
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
-                      <defs>
-                        <linearGradient id="npsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style={{ stopColor: '#FF7043' }} />
-                          <stop offset="100%" style={{ stopColor: '#E64A19' }} />
-                        </linearGradient>
-                        <filter id="npsShadow">
-                          <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
-                          <feGaussianBlur stdDeviation="1" result="blur"/>
-                          <feFlood floodColor="#FF7043" floodOpacity="0.2"/>
-                          <feComposite in2="blur" operator="in"/>
-                          <feComposite in="SourceGraphic"/>
-                        </filter>
-                      </defs>
-                      <circle cx="12" cy="12" r="11" fill="url(#npsGrad)" filter="url(#npsShadow)"/>
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" fill="white"/>
-                    </svg>
-                  }
-                  email="lotlite.properties@gmail.com"
-                  description="For help related to your NPS account or investments"
-                />
-                
-                {/* Mutual Funds Query */}
-                <QueryCard
-                  icon={
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
-                      <defs>
-                        <linearGradient id="mutualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style={{ stopColor: '#FFA726' }} />
-                          <stop offset="100%" style={{ stopColor: '#F57C00' }} />
-                        </linearGradient>
-                        <filter id="mutualShadow">
-                          <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
-                          <feGaussianBlur stdDeviation="1" result="blur"/>
-                          <feFlood floodColor="#FFA726" floodOpacity="0.2"/>
-                          <feComposite in2="blur" operator="in"/>
-                          <feComposite in="SourceGraphic"/>
-                        </filter>
-                      </defs>
-                      <circle cx="12" cy="12" r="11" fill="url(#mutualGrad)" filter="url(#mutualShadow)"/>
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" fill="white"/>
-                    </svg>
-                  }
-                  email="lotlite.properties@gmail.com"
-                  description="For help with your Mutual Funds Account or your investments"
-                />
-              </div>
+          {/* Centered Cards Container */}
+          <div className="flex flex-col items-center gap-6 mt-8">
+            {/* First Row */}
+            <div className="flex gap-6">
+              {/* NPS Query Card */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="npsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#FF7043' }} />
+                        <stop offset="100%" style={{ stopColor: '#E64A19' }} />
+                      </linearGradient>
+                      <filter id="npsShadow">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#FF7043" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#npsGrad)" filter="url(#npsShadow)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For help related to your NPS account or investments"
+                gradientFrom="from-[#FF7043]"
+                gradientTo="to-[#E64A19]"
+              />
+
+              {/* Mutual Funds Query Card */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="mutualGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#FFA726' }} />
+                        <stop offset="100%" style={{ stopColor: '#F57C00' }} />
+                      </linearGradient>
+                      <filter id="mutualShadow">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#FFA726" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#mutualGrad)" filter="url(#mutualShadow)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For help with your Mutual Funds Account or your investments"
+                gradientFrom="from-[#FFA726]"
+                gradientTo="to-[#F57C00]"
+              />
+
+              {/* Additional Card 1 */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="additionalGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#26A69A' }} />
+                        <stop offset="100%" style={{ stopColor: '#00796B' }} />
+                      </linearGradient>
+                      <filter id="additionalShadow1">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#26A69A" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#additionalGrad1)" filter="url(#additionalShadow1)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For help with your Investment Portfolio and Advisory Services"
+                gradientFrom="from-[#26A69A]"
+                gradientTo="to-[#00796B]"
+              />
+            </div>
+
+            {/* Second Row */}
+            <div className="flex gap-6">
+              {/* Additional Card 2 */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="additionalGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#7E57C2' }} />
+                        <stop offset="100%" style={{ stopColor: '#512DA8' }} />
+                      </linearGradient>
+                      <filter id="additionalShadow2">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#7E57C2" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#additionalGrad2)" filter="url(#additionalShadow2)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For assistance with Global Investment Opportunities"
+                gradientFrom="from-[#7E57C2]"
+                gradientTo="to-[#512DA8]"
+              />
+
+              {/* Additional Card 3 */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="additionalGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#EC407A' }} />
+                        <stop offset="100%" style={{ stopColor: '#C2185B' }} />
+                      </linearGradient>
+                      <filter id="additionalShadow3">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#EC407A" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#additionalGrad3)" filter="url(#additionalShadow3)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For Tax Planning and Investment Advisory"
+                gradientFrom="from-[#EC407A]"
+                gradientTo="to-[#C2185B]"
+              />
+
+              {/* Additional Card 4 */}
+              <QueryCard
+                icon={
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-xl">
+                    <defs>
+                      <linearGradient id="additionalGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#66BB6A' }} />
+                        <stop offset="100%" style={{ stopColor: '#388E3C' }} />
+                      </linearGradient>
+                      <filter id="additionalShadow4">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.4"/>
+                        <feGaussianBlur stdDeviation="1" result="blur"/>
+                        <feFlood floodColor="#66BB6A" floodOpacity="0.2"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feComposite in="SourceGraphic"/>
+                      </filter>
+                    </defs>
+                    <circle cx="12" cy="12" r="11" fill="url(#additionalGrad4)" filter="url(#additionalShadow4)"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="white"/>
+                  </svg>
+                }
+                email="lotlite.properties@gmail.com"
+                description="For Retirement Planning and Pension Services"
+                gradientFrom="from-[#66BB6A]"
+                gradientTo="to-[#388E3C]"
+              />
             </div>
           </div>
         </div>
