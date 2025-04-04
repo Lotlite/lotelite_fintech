@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from "react";
 
 import Navbar from '../components/Navbar'
@@ -25,36 +25,68 @@ const stats = [
 ];
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const [animatedValues, setAnimatedValues] = useState(
-    stats.map(() => 0) // Initialize all numbers to 0
-  );
+  const [animatedValues, setAnimatedValues] = useState(stats.map(() => 0));
 
   useEffect(() => {
-    stats.forEach((stat, index) => {
-      let start = 0;
-      const end = stat.value;
-      const duration = 1000; // 2 seconds
-      const incrementTime = 30; // Update every 30ms
-      const steps = duration / incrementTime;
-      const increment = end / steps;
-
-      let current = start;
-      const timer = setInterval(() => {
-        current += increment;
-        setAnimatedValues((prev) => {
-          const newValues = [...prev];
-          newValues[index] = Math.min(Math.floor(current), end);
-          return newValues;
-        });
-
-        if (current >= end) {
-          clearInterval(timer);
-        }
-      }, incrementTime);
-    });
+    setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      stats.forEach((stat, index) => {
+        let start = 0;
+        const end = stat.value;
+        const duration = 1000;
+        const incrementTime = 30;
+        const steps = duration / incrementTime;
+        const increment = end / steps;
+
+        let current = start;
+        const timer = setInterval(() => {
+          current += increment;
+          setAnimatedValues((prev) => {
+            const newValues = [...prev];
+            newValues[index] = Math.min(Math.floor(current), end);
+            return newValues;
+          });
+
+          if (current >= end) {
+            clearInterval(timer);
+          }
+        }, incrementTime);
+
+        return () => clearInterval(timer);
+      });
+    }
+  }, [mounted]);
+
+  if (!mounted) {
+    return (
+      <UserExperience>
+        <div className="min-h-screen bg-white">
+          <Navbar />
+          <main className="pt-0 mt-20">
+            {/* Initial static render */}
+            <div className="relative text-white h-[85vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: "url('/images/hero-bg.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                marginTop: "-64px"
+              }}>
+              <div className="absolute inset-0 bg-blue-600 bg-opacity-25"></div>
+              <div className="relative max-w-7xl mx-auto text-center px-4">
+                {/* Static content */}
+              </div>
+            </div>
+          </main>
+        </div>
+      </UserExperience>
+    );
+  }
 
   return (
     <UserExperience>
