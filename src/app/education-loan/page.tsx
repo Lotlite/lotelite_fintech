@@ -107,7 +107,7 @@ function EducationLoanPage() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="text-4xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-200 to-blue-600 bg-clip-text text-transparent"
                 >
-                    Education Loan Application
+                        Education Loan Application
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -117,7 +117,7 @@ function EducationLoanPage() {
                 >
                     Fill out the form below to apply for an education loan
                 </motion.p>
-            </div>
+                </div>
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -198,12 +198,12 @@ function EducationLoanPage() {
 
                     {/* Submit Button */}
                     <div className="pt-5">
-                        <button
-                            type="submit"
+                            <button
+                                type="submit"
                             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                            Submit Application
-                        </button>
+                            >
+                                Submit Application
+                            </button>
                     </div>
                 </form>
             </motion.div>

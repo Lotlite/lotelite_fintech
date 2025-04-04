@@ -64,14 +64,15 @@ const UserExperience: React.FC<UserExperienceProps> = ({ children }) => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className={`fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 z-40 ${isScrolling ? 'translate-y-0' : 'translate-y-20'
-            }`}
+          aria-label="Scroll to top"
+          className={`fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 z-40 ${isScrolling ? 'translate-y-0' : 'translate-y-20'}`}
         >
           <svg
             className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"

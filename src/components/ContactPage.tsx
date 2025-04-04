@@ -6,6 +6,7 @@ import Image from 'next/image';
 import React from 'react';
 import { FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import ContactFooter from './ContactFooter';
+import styles from './ContactPage.module.css';
 
 const ContactCard = ({ 
   icon, 
@@ -42,7 +43,7 @@ const ContactCard = ({
   return (
     <div 
       ref={cardRef}
-      className={`contact-card rounded-xl p-8 shadow-lg transition-all duration-500 ease-out relative overflow-hidden group hover:scale-105 transform ${isSpecialCard ? 'bg-transparent' : 'bg-white'}`}
+      className={`${styles.contactCard} rounded-xl p-8 shadow-lg transition-all duration-500 ease-out relative overflow-hidden group hover:scale-105 transform ${isSpecialCard ? 'bg-transparent' : 'bg-white'}`}
     >
       {isSpecialCard && (
         <div 
@@ -184,7 +185,7 @@ const ContactPage = () => {
 
         {/* Floating Icons Effect */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute w-full h-full animate-float">
+          <div className={`${styles.animateFloat} absolute w-full h-full`}>
             <div className="absolute top-1/4 left-1/4 w-8 h-8 bg-yellow-400 rounded-full opacity-10"></div>
             <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-blue-400 rounded-full opacity-10"></div>
             <div className="absolute bottom-1/4 right-1/4 w-10 h-10 bg-green-400 rounded-full opacity-10"></div>
@@ -197,68 +198,6 @@ const ContactPage = () => {
 
       {/* Footer */}
       <ContactFooter />
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .contact-card {
-          background: white;
-          box-shadow: 
-            0 10px 30px -5px rgba(0, 0, 0, 0.2),
-            0 0 20px rgba(255, 255, 255, 0.1);
-          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .contact-card:hover {
-          transform: translateY(-5px) scale(1.05);
-          box-shadow: 
-            0 20px 40px -5px rgba(0, 0, 0, 0.3),
-            0 0 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .contact-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 0.75rem;
-          padding: 2px;
-          background: linear-gradient(
-            45deg,
-            transparent,
-            rgba(255, 255, 255, 0.3)
-          );
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          pointer-events: none;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-        }
-
-        .contact-card:hover::before {
-          opacity: 1;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .contact-card,
-          .contact-card:hover,
-          .contact-card::before,
-          .icon-wrapper {
-            transition: none;
-            transform: none;
-          }
-          .animate-float {
-            animation: none;
-          }
-        }
-      `}</style>
     </>
   );
 };

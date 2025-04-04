@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import PropertyLoanForm from '@/components/loan-forms/PropertyLoanForm';
 import HomeLoanForm from '@/components/loan-forms/HomeLoanForm';
 import EducationLoanForm from '@/components/loan-forms/EducationLoanForm';
@@ -28,68 +30,188 @@ const LoanApplicationPage = () => {
             default:
                 return (
                     <div className="max-w-4xl mx-auto p-8">
-                        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Select Loan Type</h1>
-                        <div className="grid md:grid-cols-3 gap-6">
+                        <motion.h1 
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-transparent bg-clip-text animate-gradient"
+                        >
+                            Select Your Loan Type
+                        </motion.h1>
+                        <motion.div 
+                            className="grid md:grid-cols-3 gap-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                        >
                             {/* Property Loan Card */}
-                            <div
+                            <motion.div
+                                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => setSelectedLoanType('property')}
-                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                             >
                                 <div className="text-center">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Property Loan</h2>
-                                    <p className="text-gray-600 mb-4">
-                                        Get financing for your property with competitive interest rates and flexible terms.
-                                    </p>
-                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200">
+                                    <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                                        <Image
+                                            src="/images/Property-Loan (1).jpg"
+                                            alt="Property Loan"
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                            priority
+                                        />
+                                    </div>
+                                    <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-transparent bg-clip-text">Property Loan</h2>
+                                    <div className="mb-4 text-left space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Interest Rate</p>
+                                                <p className="text-lg font-semibold text-blue-600">Starting from 8.5%</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Processing Time</p>
+                                                <p className="text-lg font-semibold text-blue-600">24-48 hours</p>
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Min Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹30 Lakh</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Max Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹10 Cr</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <motion.button 
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md w-full"
+                                    >
                                         Apply Now
-                                    </button>
+                                    </motion.button>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Home Loan Card */}
-                            <div
+                            <motion.div
+                                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => setSelectedLoanType('home')}
-                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                             >
                                 <div className="text-center">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Home Loan</h2>
-                                    <p className="text-gray-600 mb-4">
-                                        Make your dream home a reality with our comprehensive home loan solutions.
-                                    </p>
-                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200">
+                                    <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                                        <Image
+                                            src="/images/Home-Loan.jpg"
+                                            alt="Home Loan"
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                            priority
+                                        />
+                                    </div>
+                                    <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-transparent bg-clip-text">Home Loan</h2>
+                                    <div className="mb-4 text-left space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Interest Rate</p>
+                                                <p className="text-lg font-semibold text-blue-600">Starting from 9%</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Processing Time</p>
+                                                <p className="text-lg font-semibold text-blue-600">48-72 hours</p>
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Min Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹10 Lakh</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Max Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹10 Cr</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <motion.button 
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md w-full"
+                                    >
                                         Apply Now
-                                    </button>
+                                    </motion.button>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Education Loan Card */}
-                            <div
+                            <motion.div
+                                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => setSelectedLoanType('education')}
-                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300 border border-gray-100"
                             >
                                 <div className="text-center">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Education Loan</h2>
-                                    <p className="text-gray-600 mb-4">
-                                        Invest in your future with our education loan programs for various courses.
-                                    </p>
-                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200">
+                                    <div className="relative w-full h-40 mb-6 rounded-lg overflow-hidden">
+                                        <Image
+                                            src="/images/Edu-Loan.jpg"
+                                            alt="Education Loan"
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                            priority
+                                        />
+                                    </div>
+                                    <h2 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-transparent bg-clip-text">Education Loan</h2>
+                                    <div className="mb-4 text-left space-y-4">
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Interest Rate</p>
+                                                <p className="text-lg font-semibold text-blue-600">Starting from 6.5%</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Processing Time</p>
+                                                <p className="text-lg font-semibold text-blue-600">5-7 days</p>
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <p className="text-sm text-gray-600">Min Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹4 Lakh</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm text-gray-600">Max Amount</p>
+                                                <p className="text-lg font-semibold text-blue-600">₹1.5 Cr</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <motion.button 
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md w-full"
+                                    >
                                         Apply Now
-                                    </button>
+                                    </motion.button>
                                 </div>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
                 );
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12">
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
             {selectedLoanType && (
-                <div className="mb-8 text-center">
-                    <button
+                <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-8 text-center"
+                >
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         onClick={() => setSelectedLoanType('')}
-                        className="text-blue-600 hover:text-blue-800 flex items-center justify-center mx-auto"
+                        className="text-blue-600 hover:text-blue-800 flex items-center justify-center mx-auto transition-colors duration-200"
                     >
                         <svg
                             className="w-5 h-5 mr-2"
@@ -105,8 +227,8 @@ const LoanApplicationPage = () => {
                             />
                         </svg>
                         Back to Loan Types
-                    </button>
-                </div>
+                    </motion.button>
+                </motion.div>
             )}
             {renderForm()}
         </div>

@@ -28,15 +28,9 @@ const ContactFooter = () => {
                 Fintech
               </h3>
             </div>
-            <p className="text-gray-400 text-sm mb-6">
+            <p className="text-gray-400 text-sm">
             At Fintech, we specialize in developing innovative loan solutions tailored to meet the unique financial needs of your business.
             </p>
-            <Link href="/about" className="text-blue-400 hover:text-blue-300 transition-colors flex items-center group">
-              Learn More About Us
-              <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
           </div>
 
           {/* Quick Links */}
@@ -49,12 +43,12 @@ const ContactFooter = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/loan-application" className="text-gray-400 hover:text-white transition-colors">
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/ContactPage" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
                 </Link>
                 </li>

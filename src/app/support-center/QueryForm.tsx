@@ -113,7 +113,7 @@ const QueryForm = () => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value.slice(0, MAX_CHARS))}
                   placeholder="Please provide details about your query"
-                  className="w-full min-h-[150px] bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  className="w-full min-h-[150px] bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   required
                 />
                 <div className="absolute bottom-3 right-3 flex items-center">

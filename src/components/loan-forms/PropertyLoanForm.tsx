@@ -62,35 +62,44 @@ const PropertyLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Personal Information</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
                         <input
+                            id="fullName"
                             type="text"
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your full name"
+                            title="Enter your full name"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
+                            id="email"
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your email address"
+                            title="Enter your email address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
                         <input
+                            id="phone"
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your phone number"
+                            title="Enter your phone number"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -100,12 +109,15 @@ const PropertyLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Property Details</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Property Type</label>
+                        <label htmlFor="propertyType" className="block text-sm font-medium text-gray-700">Property Type</label>
                         <select
+                            id="propertyType"
                             name="propertyType"
                             value={formData.propertyType}
                             onChange={handleChange}
                             required
+                            title="Select property type"
+                            aria-label="Select property type"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         >
                             <option value="">Select Property Type</option>
@@ -115,24 +127,30 @@ const PropertyLoanForm = () => {
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Property Value</label>
+                        <label htmlFor="propertyValue" className="block text-sm font-medium text-gray-700">Property Value</label>
                         <input
+                            id="propertyValue"
                             type="text"
                             name="propertyValue"
                             value={formData.propertyValue}
                             onChange={handleChange}
                             required
+                            placeholder="Enter property value"
+                            title="Enter property value"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
+                        <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
                         <input
+                            id="loanAmount"
                             type="text"
                             name="loanAmount"
                             value={formData.loanAmount}
                             onChange={handleChange}
                             required
+                            placeholder="Enter loan amount"
+                            title="Enter loan amount"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -142,12 +160,15 @@ const PropertyLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Employment Details</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Employment Type</label>
+                        <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700">Employment Type</label>
                         <select
+                            id="employmentType"
                             name="employmentType"
                             value={formData.employmentType}
                             onChange={handleChange}
                             required
+                            title="Select employment type"
+                            aria-label="Select employment type"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         >
                             <option value="">Select Employment Type</option>
@@ -157,13 +178,16 @@ const PropertyLoanForm = () => {
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Monthly Income</label>
+                        <label htmlFor="monthlyIncome" className="block text-sm font-medium text-gray-700">Monthly Income</label>
                         <input
+                            id="monthlyIncome"
                             type="text"
                             name="monthlyIncome"
                             value={formData.monthlyIncome}
                             onChange={handleChange}
                             required
+                            placeholder="Enter monthly income"
+                            title="Enter monthly income"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -173,13 +197,16 @@ const PropertyLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Property Address</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Complete Address</label>
+                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">Complete Address</label>
                         <textarea
+                            id="address"
                             name="address"
                             value={formData.address}
                             onChange={handleChange}
                             required
                             rows={4}
+                            placeholder="Enter complete property address"
+                            title="Enter complete property address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -189,17 +216,20 @@ const PropertyLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Required Documents</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Upload Documents</label>
+                        <label htmlFor="documents" className="block text-sm font-medium text-gray-700">Upload Documents</label>
                         <input
+                            id="documents"
                             type="file"
                             multiple
                             onChange={handleFileChange}
+                            title="Upload required documents"
+                            aria-label="Upload required documents"
                             className="mt-1 block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100"
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-md file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-blue-50 file:text-blue-700
+                            hover:file:bg-blue-100"
                         />
                         <p className="mt-1 text-sm text-gray-500">
                             Please upload: Property documents, ID proof, Income proof, Bank statements
