@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaGoogle } from 'react-icons/fa';
+import  FaGoogle  from 'react-icons/fa';
 
 interface FormData {
     name: string;
