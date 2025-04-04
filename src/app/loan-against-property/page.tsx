@@ -1,6 +1,4 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+'use client';import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface LoanFormData {

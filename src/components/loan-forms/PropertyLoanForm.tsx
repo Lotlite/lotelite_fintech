@@ -14,6 +14,9 @@ interface PropertyLoanFormData {
     monthlyIncome: string;
     address: string;
     documents: File[];
+    downPayment: string;
+    loanTenure: string;
+    existingLoans: string;
 }
 
 const PropertyLoanForm = () => {
@@ -29,11 +32,13 @@ const PropertyLoanForm = () => {
         monthlyIncome: '',
         address: '',
         documents: [],
+        downPayment: '',
+        loanTenure: '',
+        existingLoans: ''
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
     };
 
@@ -71,7 +76,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter your full name"
-                            title="Enter your full name"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -85,7 +89,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter your email address"
-                            title="Enter your email address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -99,7 +102,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter your phone number"
-                            title="Enter your phone number"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -116,8 +118,6 @@ const PropertyLoanForm = () => {
                             value={formData.propertyType}
                             onChange={handleChange}
                             required
-                            title="Select property type"
-                            aria-label="Select property type"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         >
                             <option value="">Select Property Type</option>
@@ -136,7 +136,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter property value"
-                            title="Enter property value"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -150,7 +149,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter loan amount"
-                            title="Enter loan amount"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -167,8 +165,6 @@ const PropertyLoanForm = () => {
                             value={formData.employmentType}
                             onChange={handleChange}
                             required
-                            title="Select employment type"
-                            aria-label="Select employment type"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         >
                             <option value="">Select Employment Type</option>
@@ -187,7 +183,6 @@ const PropertyLoanForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter monthly income"
-                            title="Enter monthly income"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -206,7 +201,6 @@ const PropertyLoanForm = () => {
                             required
                             rows={4}
                             placeholder="Enter complete property address"
-                            title="Enter complete property address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -222,8 +216,6 @@ const PropertyLoanForm = () => {
                             type="file"
                             multiple
                             onChange={handleFileChange}
-                            title="Upload required documents"
-                            aria-label="Upload required documents"
                             className="mt-1 block w-full text-sm text-gray-500
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-md file:border-0

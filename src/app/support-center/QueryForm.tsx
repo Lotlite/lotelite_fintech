@@ -1,6 +1,7 @@
 "use client";
 import { FormEvent, useState, ChangeEvent, useRef, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
+import Image from "next/image";
 
 const MAX_CHARS = 500;
 
@@ -45,16 +46,61 @@ const QueryForm = () => {
     },
   };
 
+  // Animation variants for image
+  const imageAnimation: Variants = {
+    hidden: { 
+      opacity: 0,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1]
+      }
+    }
+  };
+
+  const floatingAnimation = {
+    y: [0, -10, 0],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 py-12">
-      {/* Left Side: Image */}
-      <div className="flex-1 hidden md:block">
-        <img
-          src="/images/Support.jpg" // Replace with your actual image path
-          alt="Query Form"
-          className="w-[500px] h-auto max-h-[500px] object-cover rounded-lg shadow-lg mx-auto"
-        />
-      </div>
+    <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 py-12 bg-gradient-to-br from-gray-50 to-white">
+      {/* Left Side: Image with animations */}
+      <motion.div 
+        className="flex-1 hidden md:block relative"
+        initial="hidden"
+        animate="visible"
+        variants={imageAnimation}
+      >
+        <motion.div
+          className="relative w-[500px] h-[500px] mx-auto"
+          whileHover={{ 
+            scale: 1.01,
+            transition: { duration: 0.2 }
+          }}
+        >
+          {/* Subtle border effect */}
+          <div className="absolute inset-0 border-2 border-gray-100 rounded-lg" />
+          
+          {/* Main image */}
+          <Image
+            src="/images/Support.jpg"
+            alt="Query Form"
+            width={500}
+            height={500}
+            className="w-full h-full object-cover rounded-lg relative z-10"
+            priority
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Right Side: Form */}
       <motion.div
@@ -64,11 +110,11 @@ const QueryForm = () => {
       >
         <motion.div
           variants={containerAnimation}
-          className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-8 shadow-lg"
+          className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-8 shadow-sm"
         >
           <motion.h2
             variants={containerAnimation}
-            className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text"
+            className="text-3xl font-bold mb-6 text-center text-blue-900"
           >
             You can write to us...
           </motion.h2>
@@ -76,11 +122,11 @@ const QueryForm = () => {
           <motion.form onSubmit={handleSubmit} className="space-y-6">
             {/* Product Selection */}
             <div className="space-y-2">
-              <label className="block text-gray-400 text-lg font-medium">Select Product</label>
+              <label className="block text-blue-900 text-lg font-medium">Select Product</label>
               <select
                 value={selectedProduct}
                 onChange={(e) => setSelectedProduct(e.target.value)}
-                className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                className="w-full bg-white border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                 required
                 aria-label="Select a product for your query"
               >
@@ -93,31 +139,31 @@ const QueryForm = () => {
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="block text-gray-400 text-lg font-medium">Your Email Address</label>
+              <label className="block text-blue-900 text-lg font-medium">Your Email Address</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                className="w-full bg-white border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                 required
               />
             </div>
 
             {/* Query Field with Character Counter */}
             <div className="space-y-2">
-              <label className="block text-gray-400 text-lg font-medium">Describe your query</label>
+              <label className="block text-blue-900 text-lg font-medium">Describe your query</label>
               <div className="relative">
                 <textarea
                   ref={textareaRef}
                   value={query}
                   onChange={(e) => setQuery(e.target.value.slice(0, MAX_CHARS))}
                   placeholder="Please provide details about your query"
-                  className="w-full min-h-[150px] bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  className="w-full min-h-[150px] bg-white border border-blue-200 rounded-lg px-4 py-3 text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   required
                 />
                 <div className="absolute bottom-3 right-3 flex items-center">
-                  <span className="text-sm text-gray-400">{query.length}/{MAX_CHARS}</span>
+                  <span className="text-sm text-blue-600">{query.length}/{MAX_CHARS}</span>
                 </div>
               </div>
             </div>
@@ -127,10 +173,10 @@ const QueryForm = () => {
               type="submit"
               disabled={isLoading}
               className={`w-full relative py-3 px-6 rounded-lg text-white font-medium text-lg transition-all duration-300 overflow-hidden ${
-                isLoading ? "bg-blue-400" : "bg-gradient-to-r from-blue-500 to-purple-600"
+                isLoading ? "bg-blue-400" : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
               }`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
             >
               {isLoading ? (
                 <motion.div
