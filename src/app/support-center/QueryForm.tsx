@@ -82,6 +82,7 @@ const QueryForm = () => {
                 onChange={(e) => setSelectedProduct(e.target.value)}
                 className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                 required
+                aria-label="Select a product for your query"
               >
                 <option value="">Select a product</option>
                 <option value="property">Property Loan</option>

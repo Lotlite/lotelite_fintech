@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface EducationLoanFormData {
@@ -40,8 +40,13 @@ interface EducationLoanFormData {
     creditScore: string;
 }
 
+interface FormErrors {
+    [key: string]: string;
+}
+
 function EducationLoanPage() {
     const router = useRouter();
+    const [mounted, setMounted] = useState(false);
     const [formData, setFormData] = useState<EducationLoanFormData>({
         // Student Details
         studentName: '',
@@ -79,10 +84,175 @@ function EducationLoanPage() {
         creditScore: ''
     });
 
+    const [errors, setErrors] = useState<FormErrors>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const validateForm = (): boolean => {
+        const newErrors: FormErrors = {};
+
+        // Student Details Validation
+        if (!formData.studentName.trim()) {
+            newErrors.studentName = 'Student name is required';
+        }
+
+        if (!formData.dateOfBirth) {
+            newErrors.dateOfBirth = 'Date of birth is required';
+        } else {
+            const dob = new Date(formData.dateOfBirth);
+            const today = new Date();
+            const age = today.getFullYear() - dob.getFullYear();
+            if (age < 18) {
+                newErrors.dateOfBirth = 'Student must be at least 18 years old';
+            }
+        }
+
+        if (!formData.aadharNumber.trim()) {
+            newErrors.aadharNumber = 'Aadhar number is required';
+        } else if (!/^\d{12}$/.test(formData.aadharNumber)) {
+            newErrors.aadharNumber = 'Aadhar number must be 12 digits';
+        }
+
+        if (!formData.panNumber.trim()) {
+            newErrors.panNumber = 'PAN number is required';
+        } else if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(formData.panNumber)) {
+            newErrors.panNumber = 'Invalid PAN number format';
+        }
+
+        if (!formData.address.trim()) {
+            newErrors.address = 'Address is required';
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Invalid email format';
+        }
+
+        if (!formData.phoneNumber.trim()) {
+            newErrors.phoneNumber = 'Phone number is required';
+        } else if (!/^[0-9]{10}$/.test(formData.phoneNumber)) {
+            newErrors.phoneNumber = 'Phone number must be 10 digits';
+        }
+
+        // Parent/Guardian Details Validation
+        if (!formData.guardianName.trim()) {
+            newErrors.guardianName = 'Guardian name is required';
+        }
+
+        if (!formData.guardianRelation.trim()) {
+            newErrors.guardianRelation = 'Guardian relation is required';
+        }
+
+        if (!formData.guardianPhone.trim()) {
+            newErrors.guardianPhone = 'Guardian phone number is required';
+        } else if (!/^[0-9]{10}$/.test(formData.guardianPhone)) {
+            newErrors.guardianPhone = 'Phone number must be 10 digits';
+        }
+
+        if (!formData.annualFamilyIncome.trim()) {
+            newErrors.annualFamilyIncome = 'Annual family income is required';
+        }
+
+        // Course Details Validation
+        if (!formData.courseName.trim()) {
+            newErrors.courseName = 'Course name is required';
+        }
+
+        if (!formData.courseDuration.trim()) {
+            newErrors.courseDuration = 'Course duration is required';
+        }
+
+        if (!formData.instituteName.trim()) {
+            newErrors.instituteName = 'Institute name is required';
+        }
+
+        if (!formData.instituteAddress.trim()) {
+            newErrors.instituteAddress = 'Institute address is required';
+        }
+
+        if (!formData.courseCountry.trim()) {
+            newErrors.courseCountry = 'Course country is required';
+        }
+
+        if (!formData.totalCourseFee.trim()) {
+            newErrors.totalCourseFee = 'Total course fee is required';
+        }
+
+        if (!formData.admissionStatus.trim()) {
+            newErrors.admissionStatus = 'Admission status is required';
+        }
+
+        // Loan Details Validation
+        if (!formData.loanAmount.trim()) {
+            newErrors.loanAmount = 'Loan amount is required';
+        }
+
+        if (!formData.loanTenure.trim()) {
+            newErrors.loanTenure = 'Loan tenure is required';
+        }
+
+        if (!formData.collateralType.trim()) {
+            newErrors.collateralType = 'Collateral type is required';
+        }
+
+        // Bank Details Validation
+        if (!formData.bankName.trim()) {
+            newErrors.bankName = 'Bank name is required';
+        }
+
+        if (!formData.accountNumber.trim()) {
+            newErrors.accountNumber = 'Account number is required';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
+        setSubmitError(null);
+
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            console.log('Form submitted:', formData);
+            router.push('/success');
+        } catch (error) {
+            setSubmitError('Failed to submit form. Please try again.');
+            console.error('Form submission error:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
+    };
+
+    if (!mounted) {
+        return null; // or a loading spinner
+    }
 
     return (
         <div className="mt-20 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -97,6 +267,11 @@ function EducationLoanPage() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-lg shadow">
+                    {submitError && (
+                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <span className="block sm:inline">{submitError}</span>
+                        </div>
+                    )}
                     {/* Student Details Section */}
                     <div className="space-y-6">
                         <h2 className="text-xl font-semibold text-gray-900 border-b pb-2">Student Details</h2>
@@ -108,11 +283,14 @@ function EducationLoanPage() {
                                     id="studentName"
                                     name="studentName"
                                     value={formData.studentName}
-                                    onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.studentName ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your Full Name"
                                     required
                                 />
+                                {errors.studentName && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.studentName}</p>
+                                )}
                             </div>
 
                             <div>
@@ -122,10 +300,13 @@ function EducationLoanPage() {
                                     id="dateOfBirth"
                                     name="dateOfBirth"
                                     value={formData.dateOfBirth}
-                                    onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.dateOfBirth ? 'border-red-500' : ''}`}
                                     required
                                 />
+                                {errors.dateOfBirth && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.dateOfBirth}</p>
+                                )}
                             </div>
 
                             <div>
@@ -135,11 +316,14 @@ function EducationLoanPage() {
                                     id="aadharNumber"
                                     name="aadharNumber"
                                     value={formData.aadharNumber}
-                                    onChange={(e) => setFormData({ ...formData, aadharNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.aadharNumber ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your Aadhar Number"
                                     required
                                 />
+                                {errors.aadharNumber && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.aadharNumber}</p>
+                                )}
                             </div>
 
                             <div>
@@ -149,11 +333,14 @@ function EducationLoanPage() {
                                     id="panNumber"
                                     name="panNumber"
                                     value={formData.panNumber}
-                                    onChange={(e) => setFormData({ ...formData, panNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.panNumber ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your PAN Number"
                                     required
                                 />
+                                {errors.panNumber && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.panNumber}</p>
+                                )}
                             </div>
 
                             <div className="sm:col-span-2">
@@ -162,12 +349,15 @@ function EducationLoanPage() {
                                     id="address"
                                     name="address"
                                     value={formData.address}
-                                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.address ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your Complete Address"
                                     rows={3}
                                     required
                                 />
+                                {errors.address && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.address}</p>
+                                )}
                             </div>
 
                             <div>
@@ -177,11 +367,14 @@ function EducationLoanPage() {
                                     id="email"
                                     name="email"
                                     value={formData.email}
-                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.email ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your Email Address"
                                     required
                                 />
+                                {errors.email && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                                )}
                             </div>
 
                             <div>
@@ -191,11 +384,14 @@ function EducationLoanPage() {
                                     id="phoneNumber"
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
-                                    onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                                    className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    onChange={handleInputChange}
+                                    className={`mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.phoneNumber ? 'border-red-500' : ''}`}
                                     placeholder="Enter Your Phone Number"
                                     required
                                 />
+                                {errors.phoneNumber && (
+                                    <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -211,7 +407,7 @@ function EducationLoanPage() {
                                     id="guardianName"
                                     name="guardianName"
                                     value={formData.guardianName}
-                                    onChange={(e) => setFormData({ ...formData, guardianName: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Guardian's Name"
                                     required
@@ -224,7 +420,7 @@ function EducationLoanPage() {
                                     id="guardianRelation"
                                     name="guardianRelation"
                                     value={formData.guardianRelation}
-                                    onChange={(e) => setFormData({ ...formData, guardianRelation: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     required
                                 >
@@ -242,7 +438,7 @@ function EducationLoanPage() {
                                     id="guardianPhone"
                                     name="guardianPhone"
                                     value={formData.guardianPhone}
-                                    onChange={(e) => setFormData({ ...formData, guardianPhone: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Guardian's Phone Number"
                                     required
@@ -256,7 +452,7 @@ function EducationLoanPage() {
                                     id="annualFamilyIncome"
                                     name="annualFamilyIncome"
                                     value={formData.annualFamilyIncome}
-                                    onChange={(e) => setFormData({ ...formData, annualFamilyIncome: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Annual Family Income"
                                     required
@@ -276,7 +472,7 @@ function EducationLoanPage() {
                                     id="courseName"
                                     name="courseName"
                                     value={formData.courseName}
-                                    onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Course Name"
                                     required
@@ -290,7 +486,7 @@ function EducationLoanPage() {
                                     id="courseDuration"
                                     name="courseDuration"
                                     value={formData.courseDuration}
-                                    onChange={(e) => setFormData({ ...formData, courseDuration: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Course Duration"
                                     min="1"
@@ -306,7 +502,7 @@ function EducationLoanPage() {
                                     id="instituteName"
                                     name="instituteName"
                                     value={formData.instituteName}
-                                    onChange={(e) => setFormData({ ...formData, instituteName: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Institute Name"
                                     required
@@ -319,7 +515,7 @@ function EducationLoanPage() {
                                     id="instituteAddress"
                                     name="instituteAddress"
                                     value={formData.instituteAddress}
-                                    onChange={(e) => setFormData({ ...formData, instituteAddress: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Institute Address"
                                     rows={3}
@@ -333,7 +529,7 @@ function EducationLoanPage() {
                                     id="courseCountry"
                                     name="courseCountry"
                                     value={formData.courseCountry}
-                                    onChange={(e) => setFormData({ ...formData, courseCountry: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     required
                                 >
@@ -354,7 +550,7 @@ function EducationLoanPage() {
                                     id="totalCourseFee"
                                     name="totalCourseFee"
                                     value={formData.totalCourseFee}
-                                    onChange={(e) => setFormData({ ...formData, totalCourseFee: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Total Course Fee"
                                     required
@@ -367,7 +563,7 @@ function EducationLoanPage() {
                                     id="admissionStatus"
                                     name="admissionStatus"
                                     value={formData.admissionStatus}
-                                    onChange={(e) => setFormData({ ...formData, admissionStatus: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     required
                                 >
@@ -391,7 +587,7 @@ function EducationLoanPage() {
                                     id="loanAmount"
                                     name="loanAmount"
                                     value={formData.loanAmount}
-                                    onChange={(e) => setFormData({ ...formData, loanAmount: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Required Loan Amount"
                                     required
@@ -405,7 +601,7 @@ function EducationLoanPage() {
                                     id="loanTenure"
                                     name="loanTenure"
                                     value={formData.loanTenure}
-                                    onChange={(e) => setFormData({ ...formData, loanTenure: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Loan Tenure"
                                     min="1"
@@ -420,7 +616,7 @@ function EducationLoanPage() {
                                     id="collateralType"
                                     name="collateralType"
                                     value={formData.collateralType}
-                                    onChange={(e) => setFormData({ ...formData, collateralType: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     required
                                 >
@@ -445,7 +641,7 @@ function EducationLoanPage() {
                                     id="bankName"
                                     name="bankName"
                                     value={formData.bankName}
-                                    onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Bank Name"
                                     required
@@ -459,7 +655,7 @@ function EducationLoanPage() {
                                     id="accountNumber"
                                     name="accountNumber"
                                     value={formData.accountNumber}
-                                    onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Account Number"
                                     required
@@ -473,7 +669,7 @@ function EducationLoanPage() {
                                     id="existingLoan"
                                     name="existingLoan"
                                     value={formData.existingLoan}
-                                    onChange={(e) => setFormData({ ...formData, existingLoan: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Existing Loan Details"
                                 />
@@ -486,7 +682,7 @@ function EducationLoanPage() {
                                     id="creditScore"
                                     name="creditScore"
                                     value={formData.creditScore}
-                                    onChange={(e) => setFormData({ ...formData, creditScore: e.target.value })}
+                                    onChange={handleInputChange}
                                     className="mt-1 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                     placeholder="Enter Credit Score"
                                 />
@@ -517,9 +713,20 @@ function EducationLoanPage() {
                         <div className="flex justify-center">
                             <button
                                 type="submit"
-                                className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                disabled={isLoading}
+                                className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                Submit Application
+                                {isLoading ? (
+                                    <>
+                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Submitting...
+                                    </>
+                                ) : (
+                                    'Submit Application'
+                                )}
                             </button>
                         </div>
                     </div>
