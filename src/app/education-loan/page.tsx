@@ -42,7 +42,7 @@ interface EducationLoanFormData {
 }
 
 function EducationLoanPage() {
-    const router = useRouter();
+    // const router = useRouter();
     const [formData, setFormData] = useState<EducationLoanFormData>({
         // Student Details
         studentName: '',
