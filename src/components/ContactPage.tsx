@@ -4,7 +4,6 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import ProductQueries from './ProductQueries';
 import Image from 'next/image';
 import React from 'react';
-import { FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import ContactFooter from './ContactFooter';
 import styles from './ContactPage.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
