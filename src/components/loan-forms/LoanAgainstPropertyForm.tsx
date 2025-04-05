@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import useScrollReveal from '@/hooks/useScrollReveal';
 
-interface HomeLoanFormData {
+interface LoanAgainstPropertyFormData {
     fullName: string;
     email: string;
     phone: string;
@@ -19,9 +19,9 @@ interface HomeLoanFormData {
     existingLoans: string;
 }
 
-const HomeLoanForm = () => {
+const LoanAgainstPropertyForm = () => {
     const formRef = useScrollReveal();
-    const [formData, setFormData] = useState<HomeLoanFormData>({
+    const [formData, setFormData] = useState<LoanAgainstPropertyFormData>({
         fullName: '',
         email: '',
         phone: '',
@@ -34,12 +34,11 @@ const HomeLoanForm = () => {
         documents: [],
         downPayment: '',
         loanTenure: '',
-        existingLoans: '',
+        existingLoans: ''
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
     };
 
@@ -62,41 +61,47 @@ const HomeLoanForm = () => {
 
     return (
         <div ref={formRef} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Home Loan Application</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">Loan Against Property Application</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}
                 <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-700">Personal Information</h3>
+                    <h3 className="text-1xl font-semibold text-gray-700">Personal Information</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
                         <input
+                            id="fullName"
                             type="text"
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your full name"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
+                            id="email"
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your email address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
                         <input
+                            id="phone"
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
                             required
+                            placeholder="Enter your phone number"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -106,8 +111,9 @@ const HomeLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Property Details</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Property Type</label>
+                        <label htmlFor="propertyType" className="block text-sm font-medium text-gray-700">Property Type</label>
                         <select
+                            id="propertyType"
                             name="propertyType"
                             value={formData.propertyType}
                             onChange={handleChange}
@@ -115,62 +121,36 @@ const HomeLoanForm = () => {
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         >
                             <option value="">Select Property Type</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="villa">Villa</option>
-                            <option value="plot">Plot</option>
-                            <option value="underconstruction">Under Construction</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="industrial">Industrial</option>
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Property Value</label>
+                        <label htmlFor="propertyValue" className="block text-sm font-medium text-gray-700">Property Value</label>
                         <input
+                            id="propertyValue"
                             type="text"
                             name="propertyValue"
                             value={formData.propertyValue}
                             onChange={handleChange}
                             required
+                            placeholder="Enter property value"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Down Payment Amount</label>
+                        <label htmlFor="loanAmount" className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
                         <input
-                            type="text"
-                            name="downPayment"
-                            value={formData.downPayment}
-                            onChange={handleChange}
-                            required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Loan Amount Required</label>
-                        <input
+                            id="loanAmount"
                             type="text"
                             name="loanAmount"
                             value={formData.loanAmount}
                             onChange={handleChange}
                             required
+                            placeholder="Enter loan amount"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Loan Tenure (Years)</label>
-                        <select
-                            name="loanTenure"
-                            value={formData.loanTenure}
-                            onChange={handleChange}
-                            required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                        >
-                            <option value="">Select Tenure</option>
-                            <option value="5">5 Years</option>
-                            <option value="10">10 Years</option>
-                            <option value="15">15 Years</option>
-                            <option value="20">20 Years</option>
-                            <option value="25">25 Years</option>
-                            <option value="30">30 Years</option>
-                        </select>
                     </div>
                 </div>
 
@@ -178,8 +158,9 @@ const HomeLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Employment Details</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Employment Type</label>
+                        <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700">Employment Type</label>
                         <select
+                            id="employmentType"
                             name="employmentType"
                             value={formData.employmentType}
                             onChange={handleChange}
@@ -190,27 +171,18 @@ const HomeLoanForm = () => {
                             <option value="salaried">Salaried</option>
                             <option value="business">Business</option>
                             <option value="professional">Professional</option>
-                            <option value="self-employed">Self Employed</option>
                         </select>
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Monthly Income</label>
+                        <label htmlFor="monthlyIncome" className="block text-sm font-medium text-gray-700">Monthly Income</label>
                         <input
+                            id="monthlyIncome"
                             type="text"
                             name="monthlyIncome"
                             value={formData.monthlyIncome}
                             onChange={handleChange}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Existing Loans (if any)</label>
-                        <input
-                            type="text"
-                            name="existingLoans"
-                            value={formData.existingLoans}
-                            onChange={handleChange}
+                            placeholder="Enter monthly income"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -220,13 +192,15 @@ const HomeLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Property Address</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Complete Address</label>
+                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">Complete Address</label>
                         <textarea
+                            id="address"
                             name="address"
                             value={formData.address}
                             onChange={handleChange}
                             required
                             rows={4}
+                            placeholder="Enter complete property address"
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                         />
                     </div>
@@ -236,20 +210,21 @@ const HomeLoanForm = () => {
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-gray-700">Required Documents</h3>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Upload Documents</label>
+                        <label htmlFor="documents" className="block text-sm font-medium text-gray-700">Upload Documents</label>
                         <input
+                            id="documents"
                             type="file"
                             multiple
                             onChange={handleFileChange}
                             className="mt-1 block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100"
+                            file:mr-4 file:py-2 file:px-4
+                            file:rounded-md file:border-0
+                            file:text-sm file:font-semibold
+                            file:bg-blue-50 file:text-blue-700
+                            hover:file:bg-blue-100"
                         />
                         <p className="mt-1 text-sm text-gray-500">
-                            Please upload: Property documents, ID proof, Income proof, Bank statements, Salary slips/IT returns
+                            Please upload: Property documents, ID proof, Income proof, Bank statements
                         </p>
                     </div>
                 </div>
@@ -265,4 +240,4 @@ const HomeLoanForm = () => {
     );
 };
 
-export default HomeLoanForm; 
+export default LoanAgainstPropertyForm; 

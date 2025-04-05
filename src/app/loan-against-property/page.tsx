@@ -1,7 +1,4 @@
-'use client';
-
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+'use client';import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface LoanFormData {
@@ -14,7 +11,7 @@ interface LoanFormData {
 }
 
 export default function LoanAgainstPropertyPage() {
-    const router = useRouter();
+    const [mounted, setMounted] = useState(false);
     const [formData, setFormData] = useState<LoanFormData>({
         propertyValue: '',
         loanAmount: '',
@@ -24,10 +21,18 @@ export default function LoanAgainstPropertyPage() {
         employmentType: ''
     });
 
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         // Add your form submission logic here
     };
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <div className="mt-16 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

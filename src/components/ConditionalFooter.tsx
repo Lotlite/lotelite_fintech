@@ -1,13 +1,24 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Footer from './Footer';
+import ContactFooter from './ContactFooter';
 
-export default function ConditionalFooter() {
+const ConditionalFooter = () => {
   const pathname = usePathname();
-  const hideFooterPaths = ['/support-center', '/contact'];
-  const shouldShowFooter = !hideFooterPaths.includes(pathname);
+  
+  // Don't show footer on these pages
+  const hideFooterPaths = [
+    '/loan-application',
+    '/loan-against-property',
+    '/education-loan',
+    '/support-center'
+  ];
 
-  if (!shouldShowFooter) return null;
-  return <Footer />;
-} 
+  if (hideFooterPaths.includes(pathname)) {
+    return null;
+  }
+
+  return <ContactFooter />;
+};
+
+export default ConditionalFooter; 

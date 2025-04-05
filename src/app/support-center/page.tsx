@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ContactFooter from '@/components/ContactFooter';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import QueryForm from './QueryForm';
+import ContactFooter from '@/components/ContactFooter';
 
 // FAQ Data with categories
 const faqData = [
@@ -67,9 +67,14 @@ const faqData = [
 ];
 
 const SupportCenterPage = () => {
+  const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [expandedId, setExpandedId] = useState<number | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Get unique categories
   const categories = ['All', ...new Set(faqData.map(faq => faq.category))];
@@ -86,6 +91,10 @@ const SupportCenterPage = () => {
   const getRelatedQuestions = (relatedIds: number[]) => {
     return faqData.filter(faq => relatedIds.includes(faq.id));
   };
+
+  if (!mounted) {
+    return null; // or return a loading spinner
+  }
 
   return (
     <>
