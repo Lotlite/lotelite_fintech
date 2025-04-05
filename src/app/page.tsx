@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 
@@ -11,6 +11,7 @@ import PartnerBanks from '../components/PartnerBanks'
 
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
+
 import ContactFooter from '@/components/ContactFooter';
 
 import FAQ from '../components/FAQ'

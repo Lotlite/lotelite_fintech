@@ -61,7 +61,7 @@ export default function EligibilityForm({ isOpen, onClose }: EligibilityFormProp
               name="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="text-gray-600 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               placeholder="Enter your full name"
             />
@@ -77,7 +77,7 @@ export default function EligibilityForm({ isOpen, onClose }: EligibilityFormProp
               name="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="text-gray-600 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               placeholder="Enter your email address"
             />
@@ -93,7 +93,7 @@ export default function EligibilityForm({ isOpen, onClose }: EligibilityFormProp
               name="phone"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="text-gray-600 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               placeholder="Enter your phone number"
             />
@@ -109,7 +109,7 @@ export default function EligibilityForm({ isOpen, onClose }: EligibilityFormProp
               name="income"
               value={formData.income}
               onChange={(e) => setFormData({ ...formData, income: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="text-gray-600 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               required
               placeholder="Enter your monthly income"
               min="0"

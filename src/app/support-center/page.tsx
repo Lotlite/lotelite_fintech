@@ -132,7 +132,7 @@ const SupportCenterPage = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="relative h-[500px] w-full sticky top-8"
+              className="h-[500px] w-full sticky top-8"
             >
               <Image
                 src="/images/customer-support-service-vector-2642390.jpg"

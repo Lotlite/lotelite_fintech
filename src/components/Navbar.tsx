@@ -72,24 +72,36 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {isProductsOpen && (
                 <div className="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-lg border border-gray-200 transition-all duration-300 ease-in-out transform opacity-100 scale-100 z-50">
-                  <button
-                    onClick={() => handleProductClick('property')}
+                  <Link
+                    href="/property-loan"
                     className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
+                    onClick={() => {
+                      setIsProductsOpen(false);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Property Loan
-                  </button>
-                  <button
-                    onClick={() => handleProductClick('lap')}
+                  </Link>
+                  <Link
+                    href="/loan-against-property"
                     className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
+                    onClick={() => {
+                      setIsProductsOpen(false);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Loan Against Property
-                  </button>
-                  <button
-                    onClick={() => handleProductClick('education')}
+                  </Link>
+                  <Link
+                    href="/education-loan"
                     className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
+                    onClick={() => {
+                      setIsProductsOpen(false);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Education Loan
-                  </button>
+                  </Link>
                 </div>
               )}
             </div>
@@ -180,24 +192,36 @@ const Navbar = () => {
 
                 {isProductsOpen && (
                   <div className="mt-2 space-y-2 pl-4">
-                    <button
-                      onClick={() => handleProductClick('property')}
+                    <Link
+                      href="/property-loan"
                       className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        setIsMenuOpen(false);
+                      }}
                     >
                       Property Loan
-                    </button>
-                    <button
-                      onClick={() => handleProductClick('lap')}
+                    </Link>
+                    <Link
+                      href="/loan-against-property"
                       className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        setIsMenuOpen(false);
+                      }}
                     >
                       Loan Against Property
-                    </button>
-                    <button
-                      onClick={() => handleProductClick('education')}
+                    </Link>
+                    <Link
+                      href="/education-loan"
                       className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
+                      onClick={() => {
+                        setIsProductsOpen(false);
+                        setIsMenuOpen(false);
+                      }}
                     >
                       Education Loan
-                    </button>
+                    </Link>
                   </div>
                 )}
               </div>
