@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from "react";
+import Link from 'next/link';
 
 import Navbar from '../components/Navbar'
 import LoanServices from '../components/LoanServices'
@@ -141,17 +142,19 @@ export default function Home() {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="flex flex-col md:flex-row gap-4 justify-center mb-12"
               >
-               <button
+                <button
                   className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg"
-                  onClick={() => setIsFormOpen(true)} // Open form on click
+                  onClick={() => setIsFormOpen(true)}
                 >
                   Check Your Eligibility
                 </button>
                 {isFormOpen && <EligibilityForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />}
 
-                <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
-                  Get a Loan Offer
-                </button>
+                <Link href="/get-loan-offer">
+                  <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
+                    Get a Loan Offer
+                  </button>
+                </Link>
               </motion.div>
 
               {/* Trust Indicators */}

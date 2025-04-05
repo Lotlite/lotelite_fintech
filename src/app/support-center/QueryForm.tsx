@@ -73,40 +73,11 @@ const QueryForm = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 py-12 bg-gradient-to-br from-gray-50 to-white">
-      {/* Left Side: Image with animations */}
-      <motion.div 
-        className="flex-1 hidden md:block relative"
-        initial="hidden"
-        animate="visible"
-        variants={imageAnimation}
-      >
-        <motion.div
-          className="relative w-[500px] h-[500px] mx-auto"
-          whileHover={{ 
-            scale: 1.01,
-            transition: { duration: 0.2 }
-          }}
-        >
-          {/* Subtle border effect */}
-          <div className="absolute inset-0 border-2 border-gray-100 rounded-lg" />
-          
-          {/* Main image */}
-          <Image
-            src="/images/Support.jpg"
-            alt="Query Form"
-            width={500}
-            height={500}
-            className="w-full h-full object-cover rounded-lg relative z-10"
-            priority
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Right Side: Form */}
+      {/* Left Side: Form */}
       <motion.div
         initial="hidden"
         animate="visible"
-        className="flex-1 md:ml-12 w-full max-w-lg"
+        className="flex-1 md:mr-12 w-full max-w-lg"
       >
         <motion.div
           variants={containerAnimation}
@@ -189,6 +160,35 @@ const QueryForm = () => {
               )}
             </motion.button>
           </motion.form>
+        </motion.div>
+      </motion.div>
+
+      {/* Right Side: Image with animations */}
+      <motion.div 
+        className="flex-1 hidden md:block relative"
+        initial="hidden"
+        animate="visible"
+        variants={imageAnimation}
+      >
+        <motion.div
+          className="relative w-[500px] h-[500px] mx-auto"
+          whileHover={{ 
+            scale: 1.01,
+            transition: { duration: 0.2 }
+          }}
+        >
+          {/* Subtle border effect */}
+          <div className="absolute inset-0 border-2 border-gray-100 rounded-lg" />
+          
+          {/* Main image */}
+          <Image
+            src="/images/Support.jpg"
+            alt="Query Form"
+            width={500}
+            height={500}
+            className="w-full h-full object-cover rounded-lg relative z-10"
+            priority
+          />
         </motion.div>
       </motion.div>
     </div>

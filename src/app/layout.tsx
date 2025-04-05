@@ -18,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="min-h-screen w-full overflow-x-hidden">
         <Navbar />
-        <main>{children}</main>
+        <main className="relative w-full">
+          {children}
+        </main>
         <InquiryButton />
         <WhatsAppButton />
       </body>

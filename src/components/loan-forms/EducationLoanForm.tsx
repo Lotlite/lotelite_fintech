@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import useScrollReveal from '@/hooks/useScrollReveal';
 
 interface EducationLoanFormData {
     fullName: string;
@@ -22,7 +21,6 @@ interface EducationLoanFormData {
 }
 
 const EducationLoanForm = () => {
-    const formRef = useScrollReveal();
     const [formData, setFormData] = useState<EducationLoanFormData>({
         fullName: '',
         email: '',
@@ -64,7 +62,7 @@ const EducationLoanForm = () => {
     };
 
     return (
-        <div ref={formRef} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Education Loan Application</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information */}

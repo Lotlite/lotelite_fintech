@@ -1,11 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.products-dropdown')) {
+        setIsProductsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const handleProductClick = (type: string) => {
+    setIsProductsOpen(false);
+    setIsMenuOpen(false);
+    router.push(`/loan-application?type=${type}`);
+  };
 
   return (
     <nav className="bg-white py-4 px-6 fixed w-full top-0 z-50 shadow-sm">
@@ -26,13 +47,13 @@ const Navbar = () => {
 
             {/* Products Dropdown */}
             <div
-              className="relative"
+              className="relative group products-dropdown"
               onMouseEnter={() => setIsProductsOpen(true)}
               onMouseLeave={() => setIsProductsOpen(false)}
             >
               <Link
                 href="/loan-application"
-                className="text-gray-600 hover:text-blue-600 flex items-center px-3 py-2"
+                className="text-gray-600 hover:text-blue-600 flex items-center px-3 py-2 focus:outline-none"
               >
                 Products
                 <svg
@@ -50,25 +71,25 @@ const Navbar = () => {
 
               {/* Dropdown Menu */}
               {isProductsOpen && (
-                <div className="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-lg border border-gray-200 transition-opacity duration-300">
-                  <Link
-                    href="/loan-application?type=property"
-                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
+                <div className="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-lg border border-gray-200 transition-all duration-300 ease-in-out transform opacity-100 scale-100 z-50">
+                  <button
+                    onClick={() => handleProductClick('property')}
+                    className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
                   >
                     Property Loan
-                  </Link>
-                  <Link
-                    href="/loan-application?type=lap"
-                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
+                  </button>
+                  <button
+                    onClick={() => handleProductClick('lap')}
+                    className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
                   >
                     Loan Against Property
-                  </Link>
-                  <Link
-                    href="/loan-application?type=education"
-                    className="block px-4 py-3 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
+                  </button>
+                  <button
+                    onClick={() => handleProductClick('education')}
+                    className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
                   >
                     Education Loan
-                  </Link>
+                  </button>
                 </div>
               )}
             </div>
@@ -94,7 +115,11 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMenuOpen(!isMenuOpen);
+                setIsProductsOpen(false);
+              }}
               className="text-gray-600 hover:text-blue-600 focus:outline-none"
               aria-label="Toggle mobile menu"
             >
@@ -121,15 +146,23 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <Link href="/" className="text-gray-600 hover:text-blue-600">
+              <Link 
+                href="/" 
+                className="text-gray-600 hover:text-blue-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Home
               </Link>
 
               {/* Mobile Products Dropdown */}
-              <div className="relative">
+              <div className="relative products-dropdown">
                 <Link
                   href="/loan-application"
                   className="text-gray-600 hover:text-blue-600 flex items-center w-full text-left"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsProductsOpen(false);
+                  }}
                 >
                   Products
                   <svg
@@ -147,40 +180,46 @@ const Navbar = () => {
 
                 {isProductsOpen && (
                   <div className="mt-2 space-y-2 pl-4">
-                    <Link
-                      href="/loan-application?type=property"
-                      className="block text-gray-700 hover:text-blue-600"
+                    <button
+                      onClick={() => handleProductClick('property')}
+                      className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
                     >
                       Property Loan
-                    </Link>
-                    <Link
-                      href="/loan-application?type=lap"
-                      className="block text-gray-700 hover:text-blue-600"
+                    </button>
+                    <button
+                      onClick={() => handleProductClick('lap')}
+                      className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
                     >
                       Loan Against Property
-                    </Link>
-                    <Link
-                      href="/loan-application?type=education"
-                      className="block text-gray-700 hover:text-blue-600"
+                    </button>
+                    <button
+                      onClick={() => handleProductClick('education')}
+                      className="block w-full text-left text-gray-700 hover:text-blue-600 py-2"
                     >
                       Education Loan
-                    </Link>
+                    </button>
                   </div>
                 )}
               </div>
 
-              <Link href="/support-center" className="text-gray-600 hover:text-blue-600">
+              <Link 
+                href="/support-center" 
+                className="text-gray-600 hover:text-blue-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Support
               </Link>
               <Link
                 href="/contact"
                 className="bg-blue-600 text-white px-4 py-2 rounded-md text-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Contact Us
               </Link>
               <Link
                 href="/login"
                 className="bg-blue-600 text-white px-4 py-2 rounded-md text-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Sign In
               </Link>
