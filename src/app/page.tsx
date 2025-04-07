@@ -1,6 +1,6 @@
 'use client';
 
-import { motion} from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { useEffect, useState } from "react";
 import Link from 'next/link';
 
@@ -11,7 +11,6 @@ import PartnerBanks from '../components/PartnerBanks'
 
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
-
 import ContactFooter from '@/components/ContactFooter';
 
 import FAQ from '../components/FAQ'
@@ -26,90 +25,60 @@ const stats = [
 ];
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [animatedValues, setAnimatedValues] = useState(stats.map(() => 0));
+
+  const [animatedValues, setAnimatedValues] = useState(
+    stats.map(() => 0) // Initialize all numbers to 0
+  );
 
   useEffect(() => {
-    setMounted(true);
+    stats.forEach((stat, index) => {
+      let start = 0;
+      const end = stat.value;
+      const duration = 1000; // 2 seconds
+      const incrementTime = 30; // Update every 30ms
+      const steps = duration / incrementTime;
+      const increment = end / steps;
+
+      let current = start;
+      const timer = setInterval(() => {
+        current += increment;
+        setAnimatedValues((prev) => {
+          const newValues = [...prev];
+          newValues[index] = Math.min(Math.floor(current), end);
+          return newValues;
+        });
+
+        if (current >= end) {
+          clearInterval(timer);
+        }
+      }, incrementTime);
+    });
   }, []);
-
-  useEffect(() => {
-    if (mounted) {
-      stats.forEach((stat, index) => {
-        let start = 0;
-        const end = stat.value;
-        const duration = 1000;
-        const incrementTime = 30;
-        const steps = duration / incrementTime;
-        const increment = end / steps;
-
-        let current = start;
-        const timer = setInterval(() => {
-          current += increment;
-          setAnimatedValues((prev) => {
-            const newValues = [...prev];
-            newValues[index] = Math.min(Math.floor(current), end);
-            return newValues;
-          });
-
-          if (current >= end) {
-            clearInterval(timer);
-          }
-        }, incrementTime);
-
-        return () => clearInterval(timer);
-      });
-    }
-  }, [mounted]);
-
-  if (!mounted) {
-    return (
-      <UserExperience>
-        <div className="min-h-screen bg-white">
-          <Navbar />
-          <main className="pt-0 mt-20">
-            {/* Initial static render */}
-            <div className="relative text-white h-[85vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: "url('/images/hero-bg.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                marginTop: "-64px"
-              }}>
-              <div className="absolute inset-0 bg-blue-600 bg-opacity-25"></div>
-              <div className="relative max-w-7xl mx-auto text-center px-4">
-                {/* Static content */}
-              </div>
-            </div>
-          </main>
-        </div>
-      </UserExperience>
-    );
-  }
 
   return (
     <UserExperience>
       <div className="min-h-screen bg-white">
         <Navbar />
-        <main className="pt-0 mt-16">
+        <main className="pt-0 mt-20">
+
+
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative text-white h-[92vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+            className="relative text-white h-[85vh] flex items-center justify-center bg-cover bg-center bg-no-repeat "
             style={{
               backgroundImage: "url('/images/hero-bg.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              marginTop: "-5rem"
+              marginTop: "-64px"
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-600/40 to-black/50"></div>
-            <div className="relative max-w-7xl mx-auto text-center px-4 mt-20">
+            <div className="absolute inset-0 bg-blue-600 bg-opacity-25"></div>
+            <div className="relative max-w-7xl mx-auto text-center px-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -123,7 +92,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white drop-shadow-lg"
+                className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
               >
                 Find the Perfect Loan<br /> for Your Needs
               </motion.h1>
@@ -132,7 +101,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto drop-shadow-md"
+                className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto"
               >
                 Compare, Apply, & Track loans from multiple lenders. Get instant approval and competitive rates.
               </motion.p>
@@ -181,6 +150,7 @@ export default function Home() {
             </div>
           </motion.div>
 
+
           {/* Rest of the sections */}
           <LoanServices />
           <WhyChooseUs />
@@ -191,6 +161,7 @@ export default function Home() {
           <ContactUs />
 
         </main>
+        {/* <Footer /> */}
         <ContactFooter />
       </div>
     </UserExperience>
