@@ -112,7 +112,7 @@ const LoanApplicationPage = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <p className="text-sm text-gray-600">Interest Rate</p>
-                                        <p className="text-lg font-semibold text-blue-600">Starting from 9%</p>
+                                        <p className="text-lg font-semibold text-blue-600">Starting from 9.0%</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Processing Time</p>
