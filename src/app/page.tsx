@@ -2,6 +2,7 @@
 
 import { motion} from 'framer-motion'
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 
 import Navbar from '../components/Navbar'
 import LoanServices from '../components/LoanServices'
@@ -25,6 +26,7 @@ const stats = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [animatedValues, setAnimatedValues] = useState(stats.map(() => 0));
@@ -150,7 +152,9 @@ export default function Home() {
                 </button>
                 {isFormOpen && <EligibilityForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />}
 
-                <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
+                <button
+                onClick={() => router.push('/loan-offer')}
+                className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
                   Get a Loan Offer
                 </button>
               </motion.div>
