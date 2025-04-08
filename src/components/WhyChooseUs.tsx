@@ -40,12 +40,12 @@ const WhyChooseUs = () => {
       title: "Quick Approval",
       description: "Get loan approval within 24 hours",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
-          <path d="M24 16V24L30 28" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-          <circle cx="24" cy="24" r="2" fill="white"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
+                <path d="M24 16V24L30 28" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="24" cy="24" r="2" fill="white"/>
+              </svg>
       ),
       delay: "100ms"
     },
@@ -53,13 +53,13 @@ const WhyChooseUs = () => {
       title: "Best Interest Rates",
       description: "Competitive rates from trusted lenders",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
-          <path d="M24 14V34" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-          <path d="M29 18H21C19.3431 18 18 19.3431 18 21C18 22.6569 19.3431 24 21 24H27C28.6569 24 30 25.3431 30 27C30 28.6569 28.6569 30 27 30H18" 
-            stroke="white" strokeWidth="3" strokeLinecap="round"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
+                <path d="M24 14V34" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M29 18H21C19.3431 18 18 19.3431 18 21C18 22.6569 19.3431 24 21 24H27C28.6569 24 30 25.3431 30 27C30 28.6569 28.6569 30 27 30H18" 
+                  stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
       ),
       delay: "200ms"
     },
@@ -67,12 +67,12 @@ const WhyChooseUs = () => {
       title: "Digital Process",
       description: "100% paperless application process",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <rect x="14" y="14" width="20" height="20" rx="3" fill="#3B82F6"/>
-          <path d="M19 24L24 29L29 24" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M24 19V29" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <rect x="14" y="14" width="20" height="20" rx="3" fill="#3B82F6"/>
+                <path d="M19 24L24 29L29 24" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M24 19V29" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
       ),
       delay: "300ms"
     },
@@ -80,12 +80,12 @@ const WhyChooseUs = () => {
       title: "Expert Support",
       description: "24/7 customer support available",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
-          <path d="M18 22C18 22 20 26 24 26C28 26 30 22 30 22" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-          <circle cx="24" cy="24" r="2" fill="white"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
+                <path d="M18 22C18 22 20 26 24 26C28 26 30 22 30 22" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <circle cx="24" cy="24" r="2" fill="white"/>
+              </svg>
       ),
       delay: "400ms"
     },
@@ -106,12 +106,12 @@ const WhyChooseUs = () => {
       title: "Secure & Reliable",
       description: "Your data is encrypted and protected with top security measures.",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <path d="M16 22V18C16 14.6863 19.5817 12 24 12C28.4183 12 32 14.6863 32 18V22" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round"/>
-          <rect x="14" y="22" width="20" height="16" rx="2" fill="#3B82F6"/>
-          <path d="M24 28L24 32" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <path d="M16 22V18C16 14.6863 19.5817 12 24 12C28.4183 12 32 14.6863 32 18V22" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round"/>
+                <rect x="14" y="22" width="20" height="16" rx="2" fill="#3B82F6"/>
+                <path d="M24 28L24 32" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
       ),
       delay: "500ms"
     },
@@ -119,13 +119,13 @@ const WhyChooseUs = () => {
       title: "Easy Repayment Plans",
       description: "Multiple repayment options with flexible tenures.",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
-          <path d="M18 24H30" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-          <path d="M24 18V30" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-          <path d="M20 20L28 28" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <circle cx="24" cy="24" r="16" fill="#3B82F6"/>
+                <path d="M18 24H30" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M24 18V30" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                <path d="M20 20L28 28" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+              </svg>
       ),
       delay: "600ms"
     },
@@ -133,13 +133,13 @@ const WhyChooseUs = () => {
       title: "Minimal Documentation",
       description: "Apply with just a few basic documents, no lengthy paperwork required.",
       icon: (
-        <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
-          <rect x="16" y="12" width="16" height="24" rx="2" fill="#3B82F6"/>
-          <path d="M20 18H28" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M20 24H28" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M20 30H24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
+              <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="20" fill="#E6F0FF"/>
+                <rect x="16" y="12" width="16" height="24" rx="2" fill="#3B82F6"/>
+                <path d="M20 18H28" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M20 24H28" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M20 30H24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
       ),
       delay: "700ms"
     }

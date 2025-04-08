@@ -10,6 +10,8 @@ interface FormData {
     email: string;
     password: string;
     confirmPassword: string;
+    phone: string;
+    address: string;
 }
 
 interface FormErrors {
@@ -17,6 +19,8 @@ interface FormErrors {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    phone?: string;
+    address?: string;
 }
 
 const SignUpPage: React.FC = () => {
@@ -25,7 +29,9 @@ const SignUpPage: React.FC = () => {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        phone: '',
+        address: ''
     });
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState(false);
@@ -55,6 +61,14 @@ const SignUpPage: React.FC = () => {
             newErrors.confirmPassword = 'Passwords do not match';
         }
 
+        if (!formData.phone.trim()) {
+            newErrors.phone = 'Phone number is required';
+        }
+
+        if (!formData.address.trim()) {
+            newErrors.address = 'Address is required';
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -68,11 +82,38 @@ const SignUpPage: React.FC = () => {
 
         setIsLoading(true);
         try {
-            // Add your sign-up logic here
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
-            router.push('/dashboard');
+            const response = await fetch('http://localhost:4000/api/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    phone: formData.phone,
+                    address: formData.address
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Show success message
+                alert('Registration successful!');
+                
+                // Redirect to home page
+                router.push('/');
+            } else {
+                // Show error popup
+                alert(data.message || 'Registration failed. Please try again.');
+            }
         } catch (error) {
             console.error('Sign-up failed:', error);
+            alert('Registration failed. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -144,6 +185,44 @@ const SignUpPage: React.FC = () => {
                             />
                             {errors.email && (
                                 <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                            )}
+                        </div>
+                        <div>
+                            <label htmlFor="phone" className="sr-only">
+                                Phone Number
+                            </label>
+                            <input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                required
+                                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${errors.phone ? 'border-red-500' : 'border-gray-300'
+                                    } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                                placeholder="Enter Your Phone Number"
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            />
+                            {errors.phone && (
+                                <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
+                            )}
+                        </div>
+                        <div>
+                            <label htmlFor="address" className="sr-only">
+                                Address
+                            </label>
+                            <input
+                                id="address"
+                                name="address"
+                                type="text"
+                                required
+                                className={`appearance-none rounded-none relative block w-full px-3 py-2 border ${errors.address ? 'border-red-500' : 'border-gray-300'
+                                    } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm`}
+                                placeholder="Enter Your Address"
+                                value={formData.address}
+                                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                            />
+                            {errors.address && (
+                                <p className="mt-1 text-sm text-red-500">{errors.address}</p>
                             )}
                         </div>
                         <div>
