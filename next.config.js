@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // fontLoaders: []
+  },
   reactStrictMode: true,
   swcMinify: true,
   images: {

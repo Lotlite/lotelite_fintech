@@ -1,28 +1,27 @@
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navigation from "@/components/Navigation";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import InquiryButton from '@/components/InquiryButton';
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "LoteLite Fintech",
+export const metadata: Metadata = {
+  title: "LotliteFintech",
   description: "Your trusted financial partner",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className="min-h-screen w-full overflow-x-hidden">
-        <Navbar />
-        <main className="relative w-full">
-          {children}
-        </main>
+      <body className={inter.className}>
+        <Navigation />
+        <main>{children}</main>
         <InquiryButton />
         <WhatsAppButton />
       </body>

@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { useEffect, useState } from "react";
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import Navbar from '../components/Navbar'
 import LoanServices from '../components/LoanServices'
@@ -11,6 +11,7 @@ import PartnerBanks from '../components/PartnerBanks'
 
 import ApplicationProcess from '../components/ApplicationProcess'
 import ContactUs from '../components/ContactUs'
+
 import ContactFooter from '@/components/ContactFooter';
 
 import FAQ from '../components/FAQ'
@@ -25,6 +26,7 @@ const stats = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [animatedValues, setAnimatedValues] = useState(stats.map(() => 0));
@@ -133,7 +135,7 @@ export default function Home() {
                 transition={{ delay: 0.6, duration: 0.8 }}
                 className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto drop-shadow-md"
               >
-                Compare, Apply, & Track loans from multiple lenders. Get instant approval and competitive rates.
+                Compare, Apply, & Track loans from multiple lenders.<br /> Get instant approval and competitive rates.
               </motion.p>
 
               <motion.div
@@ -142,19 +144,19 @@ export default function Home() {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="flex flex-col md:flex-row gap-4 justify-center mb-12"
               >
-                <button
+               <button
                   className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg"
-                  onClick={() => setIsFormOpen(true)}
+                  onClick={() => setIsFormOpen(true)} // Open form on click
                 >
                   Check Your Eligibility
                 </button>
                 {isFormOpen && <EligibilityForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />}
 
-                <Link href="/get-loan-offer">
-                  <button className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
-                    Get a Loan Offer
-                  </button>
-                </Link>
+                <button
+                onClick={() => router.push('/loan-offer')}
+                className="bg-white text-blue-600 px-8 py-3 text-lg rounded-md font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 hover:shadow-lg">
+                  Get a Loan Offer
+                </button>
               </motion.div>
 
               {/* Trust Indicators */}
