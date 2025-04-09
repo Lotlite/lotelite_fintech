@@ -22,6 +22,7 @@ export default function LoginPage() {
     });
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState(false);
+    const [loginError, setLoginError] = useState('');
 
     const validateForm = (): boolean => {
         const newErrors: FormErrors = {};
@@ -42,6 +43,7 @@ export default function LoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoginError('');
 
         if (!validateForm()) {
             return;
@@ -49,11 +51,33 @@ export default function LoginPage() {
 
         setIsLoading(true);
         try {
-            // Add your login logic here
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulated API call
-            router.push('/dashboard');
+            // Connect to backend API
+            const response = await fetch('http://localhost:4000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Redirect based on user role
+                if (data.user.isAdmin) {
+                    router.push('/admin');
+                } else {
+                    router.push('/dashboard');
+                }
+            } else {
+                setLoginError(data.message || 'Login failed. Please try again.');
+            }
         } catch (error) {
             console.error('Login failed:', error);
+            setLoginError('Connection error. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -86,6 +110,11 @@ export default function LoginPage() {
                         </Link>
                     </p>
                 </div>
+                {loginError && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <span className="block sm:inline">{loginError}</span>
+                    </div>
+                )}
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>

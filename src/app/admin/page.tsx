@@ -64,7 +64,7 @@ const Page = () => {
           </div>
         </div>
         
-        {/* New Users Card */}
+        {/* New Users Card 
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-green-100 text-green-600">
@@ -75,9 +75,9 @@ const Page = () => {
               <p className="text-2xl font-semibold text-gray-800">{stats.newUsersToday}</p>
             </div>
           </div>
-        </div>
+        </div> */}
         
-        {/* Active Users Card */}
+        {/* Active Users Card 
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-purple-100 text-purple-600">
@@ -88,13 +88,13 @@ const Page = () => {
               <p className="text-2xl font-semibold text-gray-800">{stats.activeUsers}</p>
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
-      
+     {/* 
       <div className="mt-8 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
         <p className="text-gray-500">No recent activity to display.</p>
-      </div>
+      </div> */}
     </div>
   );
 };

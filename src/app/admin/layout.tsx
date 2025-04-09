@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { FaUsers, FaHome, FaSignOutAlt } from 'react-icons/fa';
+import { FaUsers as FaUsersIcon, FaHome as FaHomeIcon } from 'react-icons/fa';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -28,13 +28,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     }
   }, [router]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setIsLoggedIn(false);
-    setUser(null);
-    router.push('/');
-  };
-
   if (!isLoggedIn) {
     return <div>Loading...</div>;
   }
@@ -53,7 +46,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 href="/admin" 
                 className={`flex items-center p-2 rounded-md ${pathname === '/admin' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
               >
-                <FaHome className="mr-3" />
+                <FaHomeIcon className="mr-3" />
                 Dashboard
               </Link>
             </li>
@@ -62,18 +55,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 href="/admin/users" 
                 className={`flex items-center p-2 rounded-md ${pathname === '/admin/users' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
               >
-                <FaUsers className="mr-3" />
+                <FaUsersIcon className="mr-3" />
                 All Users
               </Link>
-            </li>
-            <li>
-              <button 
-                onClick={handleLogout}
-                className="flex items-center p-2 rounded-md text-gray-700 hover:bg-gray-100 w-full"
-              >
-                <FaSignOutAlt className="mr-3" />
-                Logout
-              </button>
             </li>
           </ul>
         </nav>
