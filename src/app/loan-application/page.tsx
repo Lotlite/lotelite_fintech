@@ -7,6 +7,127 @@ import Image from 'next/image';
 import ContactFooter from '@/components/ContactFooter';
 import ProductReviews from './ProductReviews';
 
+const LoanCalculator = () => {
+    const [loanAmount, setLoanAmount] = useState<number>(1000000);
+    const [interestRate, setInterestRate] = useState<number>(8.5);
+    const [tenure, setTenure] = useState<number>(20);
+    const [emi, setEmi] = useState<number>(0);
+    const [totalInterest, setTotalInterest] = useState<number>(0);
+    const [totalPayment, setTotalPayment] = useState<number>(0);
+
+    const calculateEMI = () => {
+        const principal = loanAmount;
+        const ratePerMonth = interestRate / (12 * 100);
+        const numberOfPayments = tenure * 12;
+
+        const emiAmount = principal * ratePerMonth * Math.pow(1 + ratePerMonth, numberOfPayments) / (Math.pow(1 + ratePerMonth, numberOfPayments) - 1);
+        const totalPaymentAmount = emiAmount * numberOfPayments;
+        const totalInterestAmount = totalPaymentAmount - principal;
+
+        setEmi(emiAmount);
+        setTotalInterest(totalInterestAmount);
+        setTotalPayment(totalPaymentAmount);
+    };
+
+    const handleCalculate = (e: React.FormEvent) => {
+        e.preventDefault();
+        calculateEMI();
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto mb-32 mt-24 p-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg"
+        >
+            <h2 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 text-transparent bg-clip-text">
+                Loan EMI Calculator
+            </h2>
+            <form onSubmit={handleCalculate} className="space-y-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Loan Amount (₹)
+                        </label>
+                        <input
+                            type="number"
+                            value={loanAmount}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(/^0+/, '');
+                                setLoanAmount(value ? Number(value) : 0);
+                            }}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                            min="100000"
+                            step="100000"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Interest Rate (%)
+                        </label>
+                        <input
+                            type="number"
+                            value={interestRate}
+                            onChange={(e) => setInterestRate(Number(e.target.value))}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                            min="5"
+                            max="20"
+                            step="0.1"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Loan Tenure (Years)
+                        </label>
+                        <input
+                            type="number"
+                            value={tenure}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(/^0+/, '');
+                                setTenure(value ? Number(value) : 0);
+                            }}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                            min="1"
+                            max="30"
+                        />
+                    </div>
+                </div>
+                <div className="text-center">
+                    <button
+                        type="submit"
+                        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md"
+                    >
+                        Calculate EMI
+                    </button>
+                </div>
+            </form>
+
+            {emi > 0 && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="mt-8 grid md:grid-cols-3 gap-6"
+                >
+                    <div className="bg-blue-50 p-6 rounded-lg">
+                        <h3 className="text-lg font-semibold text-blue-600 mb-2">Monthly EMI</h3>
+                        <p className="text-2xl font-bold text-gray-800">₹{emi.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-purple-50 p-6 rounded-lg">
+                        <h3 className="text-lg font-semibold text-purple-600 mb-2">Total Interest</h3>
+                        <p className="text-2xl font-bold text-gray-800">₹{totalInterest.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-green-50 p-6 rounded-lg">
+                        <h3 className="text-lg font-semibold text-green-600 mb-2">Total Payment</h3>
+                        <p className="text-2xl font-bold text-gray-800">₹{totalPayment.toFixed(2)}</p>
+                    </div>
+                </motion.div>
+            )}
+        </motion.div>
+    );
+};
+
 const LoanApplicationPage = () => {
     const router = useRouter();
 
@@ -180,6 +301,9 @@ const LoanApplicationPage = () => {
                         </motion.div>
                     </motion.div>
                 </div>
+
+                <LoanCalculator />
+                
                 <ProductReviews />
             </div>
             <ContactFooter />
