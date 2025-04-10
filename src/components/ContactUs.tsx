@@ -15,16 +15,55 @@ const ContactUs = () => {
     message: string;
   };
 
-  // Define state with correct type
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     email: '',
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({
+    type: null,
+    message: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('http://localhost:4000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      setStatus({
+        type: 'success',
+        message: 'Thank you for your message! We will get back to you soon.',
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error: any) {
+      setStatus({
+        type: 'error',
+        message: error.message || 'Something went wrong. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,7 +83,7 @@ const ContactUs = () => {
           Contact Us
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
           <motion.div
             ref={formRef}
@@ -65,36 +104,48 @@ const ContactUs = () => {
                   <label htmlFor={field} className="block text-sm font-medium text-gray-700 mb-1">
                     {field.charAt(0).toUpperCase() + field.slice(1)}
                   </label>
-                  {field !== 'message' ? (
-                    <input
-                      type={field === 'email' ? 'email' : 'text'}
+                  {field === 'message' ? (
+                    <textarea
                       id={field}
                       name={field}
-                      value={formData[field]} // ✅ No TypeScript error
+                      value={formData[field]}
                       onChange={handleChange}
+                      rows={4}
                       className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
                       required
                     />
                   ) : (
-                    <textarea
+                    <input
+                      type={field === 'email' ? 'email' : 'text'}
                       id={field}
                       name={field}
-                      value={formData[field]} // ✅ No TypeScript error
+                      value={formData[field]}
                       onChange={handleChange}
-                      rows={4}
                       className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:shadow-lg"
                       required
                     />
                   )}
                 </motion.div>
               ))}
+
+              {status.type && (
+                <div
+                  className={`p-4 rounded-md ${
+                    status.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
+                  }`}
+                >
+                  {status.message}
+                </div>
+              )}
+
               <motion.button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300"
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
             </form>
           </motion.div>
@@ -121,7 +172,7 @@ const ContactUs = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 * index }}
               >
-                <div className="text-blue-600">
+                <div className="flex-shrink-0">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     {icon === 'location' && (
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

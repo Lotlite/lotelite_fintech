@@ -35,7 +35,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-semibold text-blue-600">
-              FinTech
+              LotliteFintech
             </Link>
           </div>
 
