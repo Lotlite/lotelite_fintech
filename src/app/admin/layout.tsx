@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { FaUsers as FaUsersIcon, FaHome as FaHomeIcon } from 'react-icons/fa';
+import { FaUsers as FaUsersIcon, FaHouse as FaHomeIcon, FaEnvelope as FaEnvelopeIcon } from 'react-icons/fa6';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
@@ -59,6 +59,15 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 All Users
               </Link>
             </li>
+            <li>
+              <Link 
+                href="/admin/contacts" 
+                className={`flex items-center p-2 rounded-md ${pathname === '/admin/contacts' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
+              >
+                <FaEnvelopeIcon className="mr-3" />
+                Contact Submissions
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -69,7 +78,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="px-4 py-3">
             <h2 className="text-lg font-medium text-gray-800">
               {pathname === '/admin' ? 'Dashboard' : 
-               pathname === '/admin/users' ? 'All Users' : 'Admin Panel'}
+               pathname === '/admin/users' ? 'All Users' : 
+               pathname === '/admin/contacts' ? 'Contact Submissions' : 'Admin Panel'}
             </h2>
           </div>
         </header>
