@@ -70,7 +70,10 @@ export default function LoginPage() {
                 if (data.user.isAdmin) {
                     router.push('/admin');
                 } else {
-                    router.push('/dashboard');
+                    // Show success message for regular users
+                    alert('Login successful!');
+                    // Redirect regular users to home page
+                    router.push('/');
                 }
             } else {
                 setLoginError(data.message || 'Login failed. Please try again.');
