@@ -139,6 +139,14 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    // Create session
+    req.session.user = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    };
+
     // Return user data without password
     res.status(200).json({
       success: true,
@@ -159,6 +167,40 @@ router.post("/login", async (req, res) => {
       message: "Login failed. Please try again.",
     });
   }
+});
+
+// @desc    Logout user
+// @route   POST /api/users/logout
+// @access  Private
+router.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Error logging out",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  });
+});
+
+// @desc    Get current user
+// @route   GET /api/users/me
+// @access  Private
+router.get("/me", (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({
+      success: false,
+      message: "Not authenticated",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    user: req.session.user,
+  });
 });
 
 module.exports = router;

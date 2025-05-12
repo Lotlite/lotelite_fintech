@@ -57,14 +57,14 @@ export default function LoanOfferForm() {
               placeholder="Loan Amount"
               onChange={handleChange}
               required
-              className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             />
             <input
               name="purpose"
               placeholder="Loan Purpose"
               onChange={handleChange}
               required
-              className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             />
 
             <button

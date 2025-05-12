@@ -133,7 +133,7 @@ const LoanCard = ({ title, description, image, features, interestRate, processin
                   strokeWidth={2}
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 />
-              </svg>
+        </svg>
               Back to Loan Details
             </button>
             <PropertyLoanForm />
@@ -152,13 +152,13 @@ const LoanServices = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 ref={titleRef} className="text-4xl font-bold text-gray-900 mb-4">
-            Our Loan Products
-          </h2>
+          Our Loan Products
+        </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Choose from our wide range of loan products designed to meet your specific financial needs
           </p>
         </div>
-
+        
         <div className="grid md:grid-cols-3 gap-8">
           {/* Property Loan */}
           <motion.div
@@ -250,7 +250,7 @@ const LoanServices = () => {
                     >
                       <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+              </svg>
                       {item}
                     </motion.li>
                   ))}
@@ -359,7 +359,7 @@ const LoanServices = () => {
                     >
                       <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+              </svg>
                       {item}
                     </motion.li>
                   ))}
@@ -468,7 +468,7 @@ const LoanServices = () => {
                     >
                       <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
+              </svg>
                       {item}
                     </motion.li>
                   ))}
@@ -492,6 +492,6 @@ const LoanServices = () => {
   );
 };
 
-export default LoanServices;
+export default LoanServices; 
 
 

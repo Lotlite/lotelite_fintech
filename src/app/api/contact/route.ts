@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/db';
-import Contact from '@/models/Contact';
 
 export async function POST(request: Request) {
   try {
-    await connectDB();
-
     const body = await request.json();
     const { name, email, message } = body;
 
@@ -17,15 +13,23 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create new contact entry
-    const contact = await Contact.create({
-      name,
-      email,
-      message
+    // Forward the request to the backend API
+    const response = await fetch('http://localhost:4000/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
     });
 
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to submit contact form');
+    }
+
     return NextResponse.json(
-      { message: 'Contact form submitted successfully', contact },
+      { message: 'Contact form submitted successfully', contact: data.contact },
       { status: 201 }
     );
   } catch (error: any) {

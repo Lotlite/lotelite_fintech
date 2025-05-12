@@ -58,12 +58,13 @@ export default function LoginPage() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
+                credentials: 'include', // Important for session cookies
             });
 
             const data = await response.json();
 
             if (data.success) {
-                // Store user data in localStorage
+                // Store user data in localStorage for client-side state
                 localStorage.setItem('user', JSON.stringify(data.user));
                 
                 // Redirect based on user role

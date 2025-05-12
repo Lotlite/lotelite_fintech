@@ -3,89 +3,92 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { FaUsers as FaUsersIcon, FaHouse as FaHomeIcon, FaEnvelope as FaEnvelopeIcon } from 'react-icons/fa6';
+import { RiHome2Line, RiUserLine, RiMailLine } from 'react-icons/ri';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in and is an admin
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setUser(userData);
-      setIsLoggedIn(true);
-      
-      // Check if user is admin (you can add this field to your user model)
-      if (!userData.isAdmin) {
-        router.push('/');
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/users/me', {
+          credentials: 'include', // Important for session cookies
+        });
+        const data = await response.json();
+        
+        if (data.success && data.user.isAdmin) {
+          setUser(data.user);
+          setIsLoggedIn(true);
+        } else {
+          // Not an admin or not logged in
+          router.push('/login');
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        router.push('/login');
+      } finally {
+        setIsLoading(false);
       }
-    } else {
-      router.push('/login');
-    }
+    };
+
+    checkAuth();
   }, [router]);
 
-  if (!isLoggedIn) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md">
-        <div className="p-4 border-b">
-          <h1 className="text-xl font-bold text-blue-600">Admin Panel</h1>
-        </div>
-        <nav className="p-4">
-          <ul className="space-y-2">
-            <li>
-              <Link 
-                href="/admin" 
-                className={`flex items-center p-2 rounded-md ${pathname === '/admin' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
-              >
-                <FaHomeIcon className="mr-3" />
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/admin/users" 
-                className={`flex items-center p-2 rounded-md ${pathname === '/admin/users' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
-              >
-                <FaUsersIcon className="mr-3" />
-                All Users
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/admin/contacts" 
-                className={`flex items-center p-2 rounded-md ${pathname === '/admin/contacts' ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-100'}`}
-              >
-                <FaEnvelopeIcon className="mr-3" />
-                Contact Submissions
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+  if (!isLoggedIn) {
+    return null;
+  }
 
-      {/* Main Content */}
-      <div className="flex-1 overflow-auto">
-        <header className="bg-white shadow-sm">
-          <div className="px-4 py-3">
-            <h2 className="text-lg font-medium text-gray-800">
-              {pathname === '/admin' ? 'Dashboard' : 
-               pathname === '/admin/users' ? 'All Users' : 
-               pathname === '/admin/contacts' ? 'Contact Submissions' : 'Admin Panel'}
-            </h2>
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="w-64 bg-white shadow-lg h-screen fixed">
+          <div className="p-4">
+            <h2 className="text-2xl font-bold text-blue-600">Admin Panel</h2>
           </div>
-        </header>
-        <main className="p-6">
+          <nav className="mt-4">
+            <Link
+              href="/admin"
+              className={`flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 ${
+                pathname === '/admin' ? 'bg-blue-50 border-r-4 border-blue-600' : ''
+              }`}
+            >
+              <RiHome2Line className="w-5 h-5 mr-2" />
+              Dashboard
+            </Link>
+            <Link
+              href="/admin/users"
+              className={`flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 ${
+                pathname === '/admin/users' ? 'bg-blue-50 border-r-4 border-blue-600' : ''
+              }`}
+            >
+              <RiUserLine className="w-5 h-5 mr-2" />
+              Users
+            </Link>
+            <Link
+              href="/admin/applications"
+              className={`flex items-center px-4 py-2 text-gray-700 hover:bg-blue-50 ${
+                pathname === '/admin/applications' ? 'bg-blue-50 border-r-4 border-blue-600' : ''
+              }`}
+            >
+              <RiMailLine className="w-5 h-5 mr-2" />
+              Applications
+            </Link>
+          </nav>
+        </div>
+
+        {/* Main Content */}
+        <div className="ml-64 flex-1 p-8">
           {children}
-        </main>
+        </div>
       </div>
     </div>
   );

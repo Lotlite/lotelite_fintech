@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FaSearch, FaEdit, FaTrash } from 'react-icons/fa';
 
 interface User {
   _id: string;
@@ -71,6 +70,7 @@ const Page = () => {
               <th className="text-black">Phone</th>
               <th className="text-black">Address</th>
               <th className="text-black">Joined</th>
+              <th className="text-black">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -92,11 +92,19 @@ const Page = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-500">{formatDate(user.createdAt)}</div>
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button className="text-blue-600 hover:text-blue-900 mr-3">
+                      Edit
+                    </button>
+                    <button className="text-red-600 hover:text-red-900">
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
                   No users found
                 </td>
               </tr>

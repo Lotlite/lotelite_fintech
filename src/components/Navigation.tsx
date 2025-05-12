@@ -11,18 +11,50 @@ const Navigation = () => {
 
     useEffect(() => {
         // Check if user is logged in
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-            setIsLoggedIn(true);
-        }
+        const checkAuth = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/api/users/me', {
+                    credentials: 'include', // Important for session cookies
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    setUser(data.user);
+                    setIsLoggedIn(true);
+                } else {
+                    // Clear any stale data
+                    localStorage.removeItem('user');
+                    setUser(null);
+                    setIsLoggedIn(false);
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                // Clear any stale data
+                localStorage.removeItem('user');
+                setUser(null);
+                setIsLoggedIn(false);
+            }
+        };
+
+        checkAuth();
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setIsLoggedIn(false);
-        setUser(null);
-        router.push('/');
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('http://localhost:4000/api/users/logout', {
+                method: 'POST',
+                credentials: 'include', // Important for session cookies
+            });
+            
+            if (response.ok) {
+                localStorage.removeItem('user');
+                setIsLoggedIn(false);
+                setUser(null);
+                router.push('/');
+            }
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     };
 
     return (
